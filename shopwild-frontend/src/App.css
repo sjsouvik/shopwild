@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+}
+
+.page-navigation {
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+}
+
+.link-active {
+  font-weight: bold;
+}
+
+.page-navigation li:hover {
+  text-decoration: underline;
+}
+
+main {
+  position: relative;
+  top: 6.5rem;
+}
+
+.nav-item ion-icon {
+  font-size: 1.75rem;
+}
+
+.badge {
+  padding: 0.15rem 0.4rem;
+}
+
+.bg-icon {
+  top: -1.15rem;
+}
