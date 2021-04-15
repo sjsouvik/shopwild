@@ -3,13 +3,12 @@ export const filterReducer = (state, action) => {
     case "SORT":
       return { ...state, sortBy: action.payload };
 
-    case "TOGGLE_BRAND":
+    case "FILTER_BY_BRANDS":
       return {
         ...state,
-        brands: {
-          ...state.brands,
-          [action.payload]: !state.brands[action.payload],
-        },
+        filterByBrands: state.filterByBrands.includes(action.payload)
+          ? state.filterByBrands.filter((brand) => brand !== action.payload)
+          : [...state.filterByBrands, action.payload],
       };
 
     default:

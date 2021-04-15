@@ -51,9 +51,9 @@ const SideMenu = (props) => {
             <label>
               <input
                 type="checkbox"
-                checked={filterState.brands["Roadster"]}
+                checked={filterState.filterByBrands.includes("Roadster")}
                 onChange={() =>
-                  dispatch({ type: "TOGGLE_BRAND", payload: "Roadster" })
+                  dispatch({ type: "FILTER_BY_BRANDS", payload: "Roadster" })
                 }
               />
               Roadster
@@ -63,9 +63,12 @@ const SideMenu = (props) => {
             <label>
               <input
                 type="checkbox"
-                checked={filterState.brands["Dennis Lingo"]}
+                checked={filterState.filterByBrands.includes("Dennis Lingo")}
                 onChange={() =>
-                  dispatch({ type: "TOGGLE_BRAND", payload: "Dennis Lingo" })
+                  dispatch({
+                    type: "FILTER_BY_BRANDS",
+                    payload: "Dennis Lingo",
+                  })
                 }
               />
               Dennis Lingo
@@ -131,11 +134,11 @@ const AllProducts = (props) => {
 
     let filteredProducts = sortedProducts;
 
-    const brands = filterState.brands;
-
-    filteredProducts = filteredProducts.filter((product) =>
-      brands[product.brandName] ? product : false
-    );
+    if (filterState.filterByBrands.length > 0) {
+      filteredProducts = filteredProducts.filter((product) =>
+        filterState.filterByBrands.includes(product.brandName)
+      );
+    }
 
     filteredProducts = filteredProducts.filter(
       (product) =>
@@ -188,9 +191,9 @@ const AllProducts = (props) => {
             <label>
               <input
                 type="checkbox"
-                checked={filterState.brands["Roadster"]}
+                checked={filterState.filterByBrands.includes("Roadster")}
                 onChange={() =>
-                  dispatch({ type: "TOGGLE_BRAND", payload: "Roadster" })
+                  dispatch({ type: "FILTER_BY_BRANDS", payload: "Roadster" })
                 }
               />
               Roadster
@@ -200,9 +203,12 @@ const AllProducts = (props) => {
             <label>
               <input
                 type="checkbox"
-                checked={filterState.brands["Dennis Lingo"]}
+                checked={filterState.filterByBrands.includes("Dennis Lingo")}
                 onChange={() =>
-                  dispatch({ type: "TOGGLE_BRAND", payload: "Dennis Lingo" })
+                  dispatch({
+                    type: "FILTER_BY_BRANDS",
+                    payload: "Dennis Lingo",
+                  })
                 }
               />
               Dennis Lingo

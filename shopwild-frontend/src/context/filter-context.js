@@ -7,7 +7,7 @@ const FilterContext = createContext();
 const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, {
     sortBy: null,
-    brands: { Roadster: true, "Dennis Lingo": true },
+    filterByBrands: [],
   });
   return (
     <FilterContext.Provider value={{ state, dispatch }}>
