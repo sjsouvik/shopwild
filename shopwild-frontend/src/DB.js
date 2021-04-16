@@ -1,14 +1,8 @@
-import { createContext, useContext, useReducer } from "react";
-
-import { dataReducer } from "../reducer/data-reducer";
-
-const DataContext = createContext();
-
 const calculateDiscount = (actualPrice, offeredPrice) => {
   return Math.round(((actualPrice - offeredPrice) / actualPrice) * 100);
 };
 
-export const allProducts = [
+export const allProductsFromDB = [
   {
     id: 1,
     brandName: "Roadster",
@@ -122,34 +116,3 @@ export const allProducts = [
     isAddedToCart: false,
   },
 ];
-
-const getBrands = () => {
-  return allProducts.reduce((brands, currentProduct) => {
-    if (!brands.includes(currentProduct.brandName)) {
-      return [...brands, currentProduct.brandName];
-    }
-
-    return brands;
-  }, []);
-};
-
-const dataState = {
-  allProducts,
-  wishlist: [],
-  cart: [],
-  brands: getBrands(),
-};
-
-const DataProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(dataReducer, dataState);
-
-  return (
-    <DataContext.Provider value={{ state, dispatch }}>
-      {children}
-    </DataContext.Provider>
-  );
-};
-
-export const useData = () => useContext(DataContext);
-
-export default DataProvider;

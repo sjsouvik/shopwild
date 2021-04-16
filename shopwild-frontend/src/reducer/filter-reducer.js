@@ -11,6 +11,24 @@ export const filterReducer = (state, action) => {
           : [...state.filterByBrands, action.payload],
       };
 
+    case "FILTER_BY_DISCOUNTS":
+      return {
+        ...state,
+        filterByDiscounts: state.filterByDiscounts.includes(action.payload)
+          ? state.filterByDiscounts.filter(
+              (discount) => discount !== action.payload
+            )
+          : [...state.filterByDiscounts, action.payload].sort(),
+      };
+
+    case "CLEAR_FILTER":
+      return {
+        ...state,
+        sortBy: null,
+        filterByBrands: [],
+        filterByDiscounts: [],
+      };
+
     default:
       return state;
   }

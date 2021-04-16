@@ -76,16 +76,7 @@ const Product = (props) => {
 
       <Link
         to={{ pathname: `/products/${props.id}` }}
-        state={
-          props.id
-          // id: props.id
-          // image: props.image,
-          // brandName: props.title,
-          // description: props.description,
-          // details: props.details,
-          // offeredPrice: props.offeredPrice,
-          // actualPrice: props.actualPrice
-        }
+        state={props.id}
         style={{ textDecoration: "none", color: "black" }}
       >
         <div class="card-image">
@@ -105,14 +96,7 @@ const Product = (props) => {
                 <s>Rs. {props.actualPrice}</s>
               </small>
             </span>{" "}
-            <span className="card-off">
-              (
-              {Math.round(
-                ((props.actualPrice - props.offeredPrice) / props.actualPrice) *
-                  100
-              )}
-              % off)
-            </span>
+            <span className="card-off">({props.discount}% off)</span>
           </p>
         </div>
       </Link>

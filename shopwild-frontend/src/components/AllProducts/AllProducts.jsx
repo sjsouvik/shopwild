@@ -1,115 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import { useData } from "../../context/data-context";
 import { useFilter } from "../../context/filter-context";
 
+import { allProductsFromDB } from "../../DB";
+
 import Product from "./Product/Product";
+import SideBar from "./SideBar/SideBar";
+import SideBarContent from "./SideBar/SideBarContent/SideBarContent";
 import Toast from "../Toast/Toast";
 import "./AllProducts.css";
 
 const SideMenu = (props) => {
-  const { state: filterState, dispatch } = useFilter();
-
-  return (
-    <div style={{ display: props.open ? "block" : "none" }}>
-      <nav className="side-bar">
-        <p>FILTERS</p>
-
-        <div>
-          <p>Sort By</p>
-          <p>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                onChange={() =>
-                  dispatch({ type: "SORT", payload: "SORT_HIGH_TO_LOW" })
-                }
-              />
-              Price - High to Low
-            </label>
-          </p>
-          <p>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                onChange={() =>
-                  dispatch({ type: "SORT", payload: "SORT_LOW_TO_HIGH" })
-                }
-              />
-              Price - Low to High
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>BRAND</p>
-
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                checked={filterState.filterByBrands.includes("Roadster")}
-                onChange={() =>
-                  dispatch({ type: "FILTER_BY_BRANDS", payload: "Roadster" })
-                }
-              />
-              Roadster
-            </label>
-          </p>
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                checked={filterState.filterByBrands.includes("Dennis Lingo")}
-                onChange={() =>
-                  dispatch({
-                    type: "FILTER_BY_BRANDS",
-                    payload: "Dennis Lingo",
-                  })
-                }
-              />
-              Dennis Lingo
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>PRICE</p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Rs. 500 to Rs. 1000
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Rs. 1000 to Rs. 2000
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>COLOR</p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Blue
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Red
-            </label>
-          </p>
-        </div>
-      </nav>
-    </div>
-  );
+  return <nav className="side-menu">{props.children}</nav>;
 };
 
 const AllProducts = (props) => {
@@ -124,12 +27,14 @@ const AllProducts = (props) => {
   const filterProducts = (products) => {
     const sortBy = filterState.sortBy;
 
-    let sortedProducts = products;
+    let sortedProducts;
 
     if (sortBy && sortBy === "SORT_HIGH_TO_LOW") {
       sortedProducts = products.sort((a, b) => b.offeredPrice - a.offeredPrice);
     } else if (sortBy && sortBy === "SORT_LOW_TO_HIGH") {
       sortedProducts = products.sort((a, b) => a.offeredPrice - b.offeredPrice);
+    } else {
+      sortedProducts = allProductsFromDB;
     }
 
     let filteredProducts = sortedProducts;
@@ -137,6 +42,12 @@ const AllProducts = (props) => {
     if (filterState.filterByBrands.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
         filterState.filterByBrands.includes(product.brandName)
+      );
+    }
+
+    if (filterState.filterByDiscounts.length > 0) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.discount >= filterState.filterByDiscounts[0]
       );
     }
 
@@ -149,106 +60,17 @@ const AllProducts = (props) => {
     return filteredProducts;
   };
 
+  const sortHandler = (e) => {
+    dispatch({ type: "SORT", payload: e.target.value });
+  };
+
   const filteredProducts = filterProducts(state.allProducts);
 
   return (
     <div className="grid-row">
-      <nav className="side-menu">
-        <p>FILTERS</p>
-
-        <div>
-          <p>Sort By</p>
-          <p>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                onChange={() =>
-                  dispatch({ type: "SORT", payload: "SORT_HIGH_TO_LOW" })
-                }
-              />
-              Price - High to Low
-            </label>
-          </p>
-          <p>
-            <label>
-              <input
-                type="radio"
-                name="sort"
-                onChange={() =>
-                  dispatch({ type: "SORT", payload: "SORT_LOW_TO_HIGH" })
-                }
-              />
-              Price - Low to High
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>BRAND</p>
-
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                checked={filterState.filterByBrands.includes("Roadster")}
-                onChange={() =>
-                  dispatch({ type: "FILTER_BY_BRANDS", payload: "Roadster" })
-                }
-              />
-              Roadster
-            </label>
-          </p>
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                checked={filterState.filterByBrands.includes("Dennis Lingo")}
-                onChange={() =>
-                  dispatch({
-                    type: "FILTER_BY_BRANDS",
-                    payload: "Dennis Lingo",
-                  })
-                }
-              />
-              Dennis Lingo
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>PRICE</p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Rs. 500 to Rs. 1000
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Rs. 1000 to Rs. 2000
-            </label>
-          </p>
-        </div>
-
-        <div>
-          <p>COLOR</p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Blue
-            </label>
-          </p>
-          <p>
-            <label>
-              <input type="checkbox" />
-              Red
-            </label>
-          </p>
-        </div>
-      </nav>
-
+      <SideMenu>
+        <SideBarContent />
+      </SideMenu>
       <div className="products">
         <input
           type="text"
@@ -276,6 +98,7 @@ const AllProducts = (props) => {
               image={product.image}
               offeredPrice={product.offeredPrice}
               actualPrice={product.actualPrice}
+              discount={product.discount}
               buttonText="ADD TO CART"
               wishlist={product.isWishlisted}
               cart={product.isAddedToCart}
@@ -285,7 +108,9 @@ const AllProducts = (props) => {
           ))}
         </div>
 
-        <SideMenu open={openFilter} />
+        <SideBar open={openFilter}>
+          <SideBarContent />
+        </SideBar>
         <div
           className="arrow-top filter-button"
           onClick={() => setOpenFilter((filter) => !filter)}

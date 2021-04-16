@@ -8,6 +8,7 @@ const FilterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, {
     sortBy: null,
     filterByBrands: [],
+    filterByDiscounts: [],
   });
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

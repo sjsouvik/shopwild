@@ -12,7 +12,6 @@ import { useData } from "./context/data-context";
 
 const App = () => {
   const { state } = useData();
-  console.log(state);
 
   return (
     <div className="App">
