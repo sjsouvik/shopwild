@@ -1,5 +1,7 @@
 import { useData } from "../../../context/data-context";
 
+import serverRequests from "../../../server/serverRequests";
+
 const CartProduct = (props) => {
   const { dispatch } = useData();
 
@@ -11,16 +13,63 @@ const CartProduct = (props) => {
     }, 2000);
   };
 
-  const clickHandler = (e) => {
+  const clickHandler = async (e) => {
     if (e.target.textContent === "MOVE TO WISHLIST") {
-      dispatch({ type: "ADD_TO_WISHLIST", payload: props });
-      utilToast(props.setToast, props.setToastMessage, "Moved to Wishlist!");
+      const { error } = await serverRequests({
+        requestType: "post",
+        url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
+        data: { products: [{ product: props.id, isWishlisted: true }] },
+      });
+
+      if (!error) {
+        dispatch({
+          type: "ADD_TO_WISHLIST",
+          payload: { product: { ...props }, isWishlisted: true },
+        });
+        utilToast(props.setToast, props.setToastMessage, "Moved to Wishlist!");
+      }
     }
 
-    dispatch({ type: "REMOVE_FROM_CART", payload: props.id });
+    const { error } = await serverRequests({
+      requestType: "post",
+      url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+      data: { products: [{ product: props.id, quantity: 0 }] },
+    });
+
+    if (!error) {
+      dispatch({ type: "REMOVE_FROM_CART", payload: props.id });
+    }
 
     if (e.target.textContent === "REMOVE") {
       utilToast(props.setToast, props.setToastMessage, "Removed from Cart!");
+    }
+  };
+
+  const increaseQuantityHandler = async () => {
+    const { error } = await serverRequests({
+      requestType: "post",
+      url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+      data: {
+        products: [{ product: props.id, quantity: props.quantity + 1 }],
+      },
+    });
+    if (!error) {
+      dispatch({ type: "INCREASE_QUANTITY", payload: props.id });
+    }
+  };
+
+  const decreaseQuantityHandler = async () => {
+    if (props.quantity > 1) {
+      const { error } = await serverRequests({
+        requestType: "post",
+        url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+        data: {
+          products: [{ product: props.id, quantity: props.quantity - 1 }],
+        },
+      });
+      if (!error) {
+        dispatch({ type: "DECREASE_QUANTITY", payload: props.id });
+      }
     }
   };
 
@@ -47,20 +96,14 @@ const CartProduct = (props) => {
             Qty:
             <button
               className="btn btn-outline-primary btn-inc"
-              onClick={() =>
-                dispatch({ type: "INCREASE_QUANTITY", payload: props.id })
-              }
+              onClick={increaseQuantityHandler}
             >
               <ion-icon name="add"></ion-icon>
             </button>
             {props.quantity}
             <button
               className="btn btn-outline-primary btn-dec"
-              onClick={() => {
-                if (props.quantity > 1) {
-                  dispatch({ type: "DECREASE_QUANTITY", payload: props.id });
-                }
-              }}
+              onClick={decreaseQuantityHandler}
             >
               <ion-icon name="remove"></ion-icon>
             </button>

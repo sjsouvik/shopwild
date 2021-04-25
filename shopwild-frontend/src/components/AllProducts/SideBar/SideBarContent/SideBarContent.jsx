@@ -9,6 +9,16 @@ const SideBarContent = () => {
     dispatch({ type: "SORT", payload: e.target.value });
   };
 
+  const getBrands = () => {
+    return state.allProducts.reduce((brands, currentProduct) => {
+      if (!brands.includes(currentProduct.brandName)) {
+        return [...brands, currentProduct.brandName];
+      }
+
+      return brands;
+    }, []);
+  };
+
   return (
     <>
       <div className="filter">
@@ -85,7 +95,7 @@ const SideBarContent = () => {
 
       <div>
         <p>BRAND</p>
-        {state.brands.map((brand) => (
+        {getBrands().map((brand) => (
           <p>
             <label>
               <input

@@ -8,10 +8,54 @@ import Cart from "./components/Cart/Cart";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import NotFound from "./components/NotFound/NotFound";
 
+import useAxios from "./server/useAxios";
+
 import { useData } from "./context/data-context";
 
 const App = () => {
-  const { state } = useData();
+  const { state, dispatch } = useData();
+
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await serverRequests({
+  //         requestType: "get",
+  //         url: `${process.env.REACT_APP_BACKEND}/product`,
+  //       });
+  //       // const response = await axios.get(
+  //       //   `${process.env.REACT_APP_BACKEND}/product`
+  //       // );
+
+  //       console.log(response);
+  //     } catch (error) {
+  //       setError(true);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, []);
+
+  const [isProductLoading, productLoadingError] = useAxios(
+    "product",
+    "get",
+    null,
+    "allProducts"
+  );
+  const [isWishlistLoading, wishlistLoadingError] = useAxios(
+    "wishlist",
+    "get",
+    null,
+    null
+  );
+  const [isCartLoading, cartLoadingError] = useAxios("cart", "get", null, null);
+
+  const wishlistLength = state.wishlist.filter((item) => item.isWishlisted)
+    .length;
+  const cartLength = state.cart.filter((item) => item.quantity > 0).length;
 
   return (
     <div className="App">
@@ -31,9 +75,9 @@ const App = () => {
             <li className="nav-item">
               <NavLink to="wishlist" activeStyle={{ fontWeight: "bold" }}>
                 <ion-icon name="heart"></ion-icon>
-                {state.wishlist.length > 0 && (
+                {wishlistLength > 0 && (
                   <span class="badge rounded-pill bg-light bg-icon">
-                    {state.wishlist.length}
+                    {wishlistLength}
                   </span>
                 )}
               </NavLink>{" "}
@@ -41,9 +85,9 @@ const App = () => {
             <li className="nav-item">
               <NavLink to="cart" activeStyle={{ fontWeight: "bold" }}>
                 <ion-icon name="cart"></ion-icon>
-                {state.cart.length > 0 && (
+                {cartLength > 0 && (
                   <span class="badge rounded-pill bg-light bg-icon">
-                    {state.cart.length}
+                    {cartLength}
                   </span>
                 )}
               </NavLink>{" "}

@@ -34,7 +34,7 @@ const AllProducts = (props) => {
     } else if (sortBy && sortBy === "SORT_LOW_TO_HIGH") {
       sortedProducts = products.sort((a, b) => a.offeredPrice - b.offeredPrice);
     } else {
-      sortedProducts = allProductsFromDB;
+      sortedProducts = products;
     }
 
     let filteredProducts = sortedProducts;

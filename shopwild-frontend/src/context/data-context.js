@@ -8,7 +8,9 @@ const calculateDiscount = (actualPrice, offeredPrice) => {
   return Math.round(((actualPrice - offeredPrice) / actualPrice) * 100);
 };
 
-export const allProducts = [
+// useEffect(()=>);
+
+export let allProducts = [
   {
     id: 1,
     brandName: "Roadster",
@@ -134,7 +136,7 @@ const getBrands = () => {
 };
 
 const dataState = {
-  allProducts,
+  allProducts: [],
   wishlist: [],
   cart: [],
   brands: getBrands(),
