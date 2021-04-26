@@ -104,9 +104,15 @@ const App = () => {
 
       <main>
         <Routes>
-          <Route path="/" element={<AllProducts />} />
-          <Route path="wishlist" element={<WishList />} />
-          <Route path="cart" element={<Cart />} />
+          <Route
+            path="/"
+            element={<AllProducts loading={isProductLoading} />}
+          />
+          <Route
+            path="wishlist"
+            element={<WishList loading={isWishlistLoading} />}
+          />
+          <Route path="cart" element={<Cart loading={isCartLoading} />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

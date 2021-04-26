@@ -9,6 +9,15 @@ const SideBarContent = () => {
     dispatch({ type: "SORT", payload: e.target.value });
   };
 
+  const sortByName = (a, b) => {
+    if (a > b) {
+      return 1;
+    } else {
+      return -1;
+    }
+
+    return 0;
+  };
   const getBrands = () => {
     return state.allProducts.reduce((brands, currentProduct) => {
       if (!brands.includes(currentProduct.brandName)) {
@@ -95,20 +104,22 @@ const SideBarContent = () => {
 
       <div>
         <p>BRAND</p>
-        {getBrands().map((brand) => (
-          <p>
-            <label>
-              <input
-                type="checkbox"
-                checked={filterState.filterByBrands.includes(brand)}
-                onChange={() =>
-                  dispatch({ type: "FILTER_BY_BRANDS", payload: brand })
-                }
-              />
-              {brand}
-            </label>
-          </p>
-        ))}
+        {getBrands()
+          .sort((a, b) => sortByName(a, b))
+          .map((brand) => (
+            <p>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={filterState.filterByBrands.includes(brand)}
+                  onChange={() =>
+                    dispatch({ type: "FILTER_BY_BRANDS", payload: brand })
+                  }
+                />
+                {brand}
+              </label>
+            </p>
+          ))}
       </div>
 
       <div>

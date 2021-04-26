@@ -3,20 +3,14 @@ import { useData } from "../../context/data-context";
 
 import Product from "../AllProducts/Product/Product";
 import Toast from "../Toast/Toast";
+import Loader from "../Loader/Loader";
 
 import useAxios from "../../server/useAxios";
 
-const Wishlist = () => {
+const Wishlist = (props) => {
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const value = useData();
-
-  const [isWishlistLoading, wishlistLoadingError] = useAxios(
-    "wishlist",
-    "get",
-    null,
-    null
-  );
 
   return (
     <div>
@@ -28,26 +22,30 @@ const Wishlist = () => {
         </span>
       </h2>
 
-      <div className="card-row">
-        {value.state.wishlist.map(
-          ({ product, isWishlisted }) =>
-            isWishlisted && (
-              <Product
-                key={product.id}
-                id={product.id}
-                title={product.brandName}
-                description={product.description}
-                image={product.image}
-                offeredPrice={product.offeredPrice}
-                actualPrice={product.actualPrice}
-                discount={product.discount}
-                buttonText="MOVE TO CART"
-                setToast={setToast}
-                setToastMessage={setToastMessage}
-              />
-            )
-        )}
-      </div>
+      {props.loading ? (
+        <Loader />
+      ) : (
+        <div className="card-row">
+          {value.state.wishlist.map(
+            ({ product, isWishlisted }) =>
+              isWishlisted && (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  title={product.brandName}
+                  description={product.description}
+                  image={product.image}
+                  offeredPrice={product.offeredPrice}
+                  actualPrice={product.actualPrice}
+                  discount={product.discount}
+                  buttonText="MOVE TO CART"
+                  setToast={setToast}
+                  setToastMessage={setToastMessage}
+                />
+              )
+          )}
+        </div>
+      )}
 
       <Toast show={toast} message={toastMessage} />
     </div>

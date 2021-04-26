@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useData } from "../../context/data-context";
 import { useFilter } from "../../context/filter-context";
 
-import { allProductsFromDB } from "../../DB";
-
 import Product from "./Product/Product";
 import SideBar from "./SideBar/SideBar";
 import SideBarContent from "./SideBar/SideBarContent/SideBarContent";
 import Toast from "../Toast/Toast";
+import Loader from "../Loader/Loader";
 import "./AllProducts.css";
 
 const SideMenu = (props) => {
@@ -79,34 +78,41 @@ const AllProducts = (props) => {
           placeholder="Search for products, brands and more"
           onChange={(e) => setSearchedText(e.target.value)}
         />
-        {filteredProducts.length === 0 && (
-          <h3>
-            No Products found{" "}
-            <em>
-              <q>{searchedText}</q>
-            </em>
-          </h3>
+
+        {props.loading ? (
+          <Loader />
+        ) : (
+          <div>
+            {filteredProducts.length === 0 && (
+              <h3>
+                No Products found{" "}
+                <em>
+                  <q>{searchedText}</q>
+                </em>
+              </h3>
+            )}
+            <div className="card-row">
+              {filteredProducts.map((product) => (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  title={product.brandName}
+                  description={product.description}
+                  details={product.details}
+                  image={product.image}
+                  offeredPrice={product.offeredPrice}
+                  actualPrice={product.actualPrice}
+                  discount={product.discount}
+                  buttonText="ADD TO CART"
+                  wishlist={product.isWishlisted}
+                  cart={product.isAddedToCart}
+                  setToast={setToast}
+                  setToastMessage={setToastMessage}
+                />
+              ))}
+            </div>
+          </div>
         )}
-        <div className="card-row">
-          {filteredProducts.map((product) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              title={product.brandName}
-              description={product.description}
-              details={product.details}
-              image={product.image}
-              offeredPrice={product.offeredPrice}
-              actualPrice={product.actualPrice}
-              discount={product.discount}
-              buttonText="ADD TO CART"
-              wishlist={product.isWishlisted}
-              cart={product.isAddedToCart}
-              setToast={setToast}
-              setToastMessage={setToastMessage}
-            />
-          ))}
-        </div>
 
         <SideBar open={openFilter}>
           <SideBarContent />
