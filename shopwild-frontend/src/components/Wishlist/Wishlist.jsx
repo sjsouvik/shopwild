@@ -5,8 +5,6 @@ import Product from "../AllProducts/Product/Product";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
-import useAxios from "../../server/useAxios";
-
 const Wishlist = (props) => {
   const [toast, setToast] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);

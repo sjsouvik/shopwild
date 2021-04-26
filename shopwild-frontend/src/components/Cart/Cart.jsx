@@ -5,8 +5,6 @@ import CartProduct from "./CartProduct/CartProduct";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
-import useAxios from "../../server/useAxios";
-
 const Cart = (props) => {
   const value = useData();
 

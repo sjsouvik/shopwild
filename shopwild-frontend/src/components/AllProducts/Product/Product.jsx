@@ -1,18 +1,14 @@
 import "./Product.css";
 
 import { useNavigate, Link } from "react-router-dom";
+
 import { useData } from "../../../context/data-context";
 
 import serverRequests from "../../../server/serverRequests";
-import useAxios from "../../../server/useAxios";
-import { useState } from "react";
 
 const Product = (props) => {
   const { dispatch } = useData();
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   const utilToast = (setToast, setToastMessage, message) => {
     setToast(true);
@@ -24,26 +20,18 @@ const Product = (props) => {
 
   const clickHandler = async (e) => {
     if (e.target.textContent === "ADD TO CART") {
-      try {
-        setLoading(true);
-        const { error } = await serverRequests({
-          requestType: "post",
-          url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
-          data: { products: [{ product: props.id, quantity: 1 }] },
-        });
+      const { error } = await serverRequests({
+        requestType: "post",
+        url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+        data: { products: [{ product: props.id, quantity: 1 }] },
+      });
 
-        // dispatch({ type: "ADD_TO_CART", payload: { ...props, qty: 1 } });
-        if (!error) {
-          dispatch({
-            type: "ADD_TO_CART",
-            payload: { product: { ...props }, quantity: 1 },
-          });
-          utilToast(props.setToast, props.setToastMessage, "Added to Cart!");
-        }
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
+      if (!error) {
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: { product: { ...props }, quantity: 1 },
+        });
+        utilToast(props.setToast, props.setToastMessage, "Added to Cart!");
       }
     } else if (e.target.textContent === "MOVE TO CART") {
       const { error } = await serverRequests({
