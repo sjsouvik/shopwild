@@ -96,7 +96,7 @@ const AllProducts = (props) => {
                 <Product
                   key={product.id}
                   id={product.id}
-                  title={product.brandName}
+                  brandName={product.brandName}
                   description={product.description}
                   details={product.details}
                   image={product.image}

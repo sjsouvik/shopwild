@@ -140,7 +140,7 @@ const Product = (props) => {
           className="card-body"
           style={{ textAlign: "left", padding: "0.5rem" }}
         >
-          <h3 className="card-title">{props.title}</h3>
+          <h3 className="card-title">{props.brandName}</h3>
           <p className="card-description">{props.description}</p>
           <p className="card-price">
             <b>Rs. {props.offeredPrice}</b>{" "}
