@@ -51,6 +51,24 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
+exports.getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({
+      category: req.category._id,
+    });
+
+    if (!products) {
+      return res.json({ message: "NOT Found any products for this category" });
+    }
+
+    res.status(200).json({ products });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Error occured", errorMessage: error.message });
+  }
+};
+
 exports.getProduct = async (req, res) => {
   let { product } = req;
   product.__v = undefined;

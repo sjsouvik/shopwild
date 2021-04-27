@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
+const { getCategoryById } = require("../controllers/category");
+
 const {
   getProductById,
   createProduct,
   getProduct,
   getAllProducts,
+  getProducts,
   updateProduct,
   deleteProduct,
 } = require("../controllers/product");
@@ -19,5 +22,9 @@ router
   .get(getProduct)
   .post(updateProduct)
   .delete(deleteProduct);
+
+router.param("categoryId", getCategoryById);
+
+router.get("/products/:categoryId", getProducts);
 
 module.exports = router;
