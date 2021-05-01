@@ -73,28 +73,36 @@ const App = () => {
               </NavLink>{" "}
             </li> */}
             <li className="nav-item">
+              <ion-icon name="person"></ion-icon>
+              <div style={{ fontSize: "0.85rem" }}>Log In</div>
+            </li>
+            <li className="nav-item">
               <NavLink to="wishlist" activeStyle={{ fontWeight: "bold" }}>
-                <ion-icon name="heart"></ion-icon>
-                {wishlistLength > 0 && (
-                  <span class="badge rounded-pill bg-light bg-icon">
-                    {wishlistLength}
-                  </span>
-                )}
+                <div style={{ position: "relative" }}>
+                  <ion-icon name="heart"></ion-icon>
+                  {wishlistLength > 0 && (
+                    <span className="badge rounded-pill bg-light bg-wishlist">
+                      {wishlistLength}
+                    </span>
+                  )}
+                </div>
+                <div style={{ fontSize: "0.85rem" }}>Wishlist</div>
               </NavLink>{" "}
             </li>
             <li className="nav-item">
               <NavLink to="cart" activeStyle={{ fontWeight: "bold" }}>
-                <ion-icon name="cart"></ion-icon>
-                {cartLength > 0 && (
-                  <span class="badge rounded-pill bg-light bg-icon">
-                    {cartLength}
-                  </span>
-                )}
-              </NavLink>{" "}
+                <div style={{ position: "relative" }}>
+                  <ion-icon name="cart"></ion-icon>
+                  {cartLength > 0 && (
+                    <span class="badge rounded-pill bg-light bg-cart">
+                      {cartLength}
+                    </span>
+                  )}
+                </div>
+                <div style={{ fontSize: "0.85rem" }}>Cart</div>
+              </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <button className="btn btn-secondary">LOG IN</button>
-            </li>
+            {/* 
             <li className="nav-item">
               <button className="btn btn-secondary">SIGN UP</button>
             </li> */}

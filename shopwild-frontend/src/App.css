@@ -29,6 +29,14 @@ main {
   padding: 0.15rem 0.4rem;
 }
 
-.bg-icon {
-  top: -1.15rem;
+.bg-wishlist {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.75rem;
+}
+
+.bg-cart {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
 }
