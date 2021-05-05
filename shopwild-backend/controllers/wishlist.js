@@ -1,3 +1,4 @@
+const cart = require("../models/cart");
 const Wishlist = require("../models/wishlist");
 
 exports.getWishlist = async (req, res) => {
@@ -54,6 +55,20 @@ exports.createUpdateWishlist = async (req, res) => {
   } catch (error) {
     res
       .status(400)
+      .json({ message: "Error occured", errorMessage: error.message });
+  }
+};
+
+exports.deleteItemFromWishlist = async (req, res) => {
+  try {
+    await Wishlist.updateOne(
+      { user: req.user },
+      { $pull: { products: req.body } }
+    );
+    res.json({ message: "Successfully deleted the item from wishlist" });
+  } catch (error) {
+    res
+      .status(404)
       .json({ message: "Error occured", errorMessage: error.message });
   }
 };

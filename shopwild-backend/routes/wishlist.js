@@ -5,10 +5,15 @@ const { getUserById } = require("../controllers/user");
 const {
   getWishlist,
   createUpdateWishlist,
+  deleteItemFromWishlist,
 } = require("../controllers/wishlist");
 
 router.param("userId", getUserById);
 
-router.route("/wishlist/:userId").get(getWishlist).post(createUpdateWishlist);
+router
+  .route("/wishlist/:userId")
+  .get(getWishlist)
+  .post(createUpdateWishlist)
+  .delete(deleteItemFromWishlist);
 
 module.exports = router;

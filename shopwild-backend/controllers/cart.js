@@ -73,3 +73,14 @@ exports.createUpdateCart = async (req, res) => {
       .json({ message: "Error occured", errorMessage: error.message });
   }
 };
+
+exports.deleteItemFromCart = async (req, res) => {
+  try {
+    await Cart.updateOne({ user: req.user }, { $pull: { products: req.body } });
+    res.json({ message: "Successfully deleted the item from cart" });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Error occured", errorMessage: error.message });
+  }
+};
