@@ -15,30 +15,6 @@ import { useData } from "./context/data-context";
 const App = () => {
   const { state, dispatch } = useData();
 
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await serverRequests({
-  //         requestType: "get",
-  //         url: `${process.env.REACT_APP_BACKEND}/product`,
-  //       });
-  //       // const response = await axios.get(
-  //       //   `${process.env.REACT_APP_BACKEND}/product`
-  //       // );
-
-  //       console.log(response);
-  //     } catch (error) {
-  //       setError(true);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   })();
-  // }, []);
-
   const [isProductLoading, productLoadingError] = useAxios(
     "product",
     "get",

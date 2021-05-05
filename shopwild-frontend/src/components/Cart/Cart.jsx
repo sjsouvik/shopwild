@@ -48,7 +48,7 @@ const Cart = (props) => {
                     <CartProduct
                       key={product.id}
                       id={product.id}
-                      title={product.brandName}
+                      brandName={product.brandName}
                       description={product.description}
                       image={product.image}
                       offeredPrice={product.offeredPrice}

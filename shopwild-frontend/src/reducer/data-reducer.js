@@ -31,6 +31,11 @@ export const dataReducer = (state, action) => {
       };
 
     case "ADD_TO_WISHLIST":
+      const wishlistProduct = isProductExistsInList(
+        state.wishlist,
+        action.payload
+      );
+      console.log(state.wishlist, wishlistProduct);
       return {
         ...state,
         allProducts: state.allProducts.map((product) =>
@@ -38,7 +43,9 @@ export const dataReducer = (state, action) => {
             ? { ...product, isWishlisted: true }
             : product
         ),
-        wishlist: [...state.wishlist, action.payload],
+        wishlist: wishlistProduct
+          ? state.wishlist
+          : [...state.wishlist, action.payload],
       };
 
     case "REMOVE_FROM_WISHLIST":
@@ -55,6 +62,7 @@ export const dataReducer = (state, action) => {
       };
 
     case "ADD_TO_CART":
+      const cartProduct = isProductExistsInList(state.cart, action.payload);
       return {
         ...state,
         allProducts: state.allProducts.map((product) =>
@@ -62,11 +70,7 @@ export const dataReducer = (state, action) => {
             ? { ...product, isAddedToCart: true }
             : product
         ),
-        cart: state.cart.find(
-          (item) => item.product.id === action.payload.product.id
-        )
-          ? state.cart
-          : [...state.cart, action.payload],
+        cart: cartProduct ? state.cart : [...state.cart, action.payload],
       };
 
     case "REMOVE_FROM_CART":
@@ -105,4 +109,8 @@ export const dataReducer = (state, action) => {
     default:
       return state;
   }
+};
+
+export const isProductExistsInList = (list, payload) => {
+  return list.find((item) => item.product.id === payload.product.id);
 };

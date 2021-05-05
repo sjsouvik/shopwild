@@ -21,6 +21,19 @@ const serverRequests = async ({ requestType, data, url }) => {
       } catch (error) {
         return { error: true };
       }
+
+    case "delete":
+      try {
+        const response = await axios.delete(url, {
+          headers: { "Content-Type": "application/json" },
+          data: data,
+        });
+        return response.status === 200
+          ? { response, error: false }
+          : { error: true };
+      } catch (error) {
+        return { error: true };
+      }
   }
 };
 

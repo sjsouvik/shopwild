@@ -31,9 +31,9 @@ const CartProduct = (props) => {
     }
 
     const { error } = await serverRequests({
-      requestType: "post",
+      requestType: "delete",
       url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
-      data: { products: [{ product: props.id, quantity: 0 }] },
+      data: { product: props.id },
     });
 
     if (!error) {
@@ -78,7 +78,7 @@ const CartProduct = (props) => {
       <img src={props.image} alt="image" className="horizontal-card-image" />
       <div className="card-body">
         <div className="horizontal-section">
-          <p className="product-title">{props.title}</p>
+          <p className="product-title">{props.brandName}</p>
           <p className="offered-price">Rs. {props.offeredPrice}</p>
         </div>
 

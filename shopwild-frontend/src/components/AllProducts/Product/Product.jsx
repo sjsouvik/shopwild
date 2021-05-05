@@ -47,9 +47,9 @@ const Product = (props) => {
         });
 
         const { error } = await serverRequests({
-          requestType: "post",
+          requestType: "delete",
           url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-          data: { products: [{ product: props.id, isWishlisted: false }] },
+          data: { product: props.id },
         });
 
         if (!error) {
@@ -64,9 +64,9 @@ const Product = (props) => {
 
   const removeFromWishlistHandler = async () => {
     const { error } = await serverRequests({
-      requestType: "post",
+      requestType: "delete",
       url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-      data: { products: [{ product: props.id, isWishlisted: false }] },
+      data: { product: props.id },
     });
 
     if (!error) {

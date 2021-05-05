@@ -24,24 +24,21 @@ const Wishlist = (props) => {
         <Loader />
       ) : (
         <div className="card-row">
-          {value.state.wishlist.map(
-            ({ product, isWishlisted }) =>
-              isWishlisted && (
-                <Product
-                  key={product.id}
-                  id={product.id}
-                  brandName={product.brandName}
-                  description={product.description}
-                  image={product.image}
-                  offeredPrice={product.offeredPrice}
-                  actualPrice={product.actualPrice}
-                  discount={product.discount}
-                  buttonText="MOVE TO CART"
-                  setToast={setToast}
-                  setToastMessage={setToastMessage}
-                />
-              )
-          )}
+          {value.state.wishlist.map(({ product }) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              brandName={product.brandName}
+              description={product.description}
+              image={product.image}
+              offeredPrice={product.offeredPrice}
+              actualPrice={product.actualPrice}
+              discount={product.discount}
+              buttonText="MOVE TO CART"
+              setToast={setToast}
+              setToastMessage={setToastMessage}
+            />
+          ))}
         </div>
       )}
 
