@@ -34,7 +34,11 @@ const Wishlist = (props) => {
               offeredPrice={product.offeredPrice}
               actualPrice={product.actualPrice}
               discount={product.discount}
-              buttonText="MOVE TO CART"
+              buttonText={
+                value.state.cart.some((item) => item.product.id === product.id)
+                  ? "GO TO CART"
+                  : "MOVE TO CART"
+              }
               setToast={setToast}
               setToastMessage={setToastMessage}
             />

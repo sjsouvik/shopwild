@@ -6,30 +6,6 @@ export const dataReducer = (state, action) => {
         [action.payload.name]: action.payload.data,
       };
 
-    case "MARK_WISHLIST_PRODUCTS":
-      return {
-        ...state,
-        allProducts: state.allProducts.map((product) =>
-          state.wishlist.find(
-            (item) => item.product.id === product.id && item.isWishlisted
-          )
-            ? { ...product, isWishlisted: true }
-            : product
-        ),
-      };
-
-    case "MARK_CART_PRODUCTS":
-      return {
-        ...state,
-        allProducts: state.allProducts.map((product) =>
-          state.cart.find(
-            (item) => item.product.id === product.id && item.quantity > 0
-          )
-            ? { ...product, isAddedToCart: true }
-            : product
-        ),
-      };
-
     case "ADD_TO_WISHLIST":
       const wishlistProduct = isProductExistsInList(
         state.wishlist,
@@ -38,11 +14,6 @@ export const dataReducer = (state, action) => {
       console.log(state.wishlist, wishlistProduct);
       return {
         ...state,
-        allProducts: state.allProducts.map((product) =>
-          product.id === action.payload.product.id
-            ? { ...product, isWishlisted: true }
-            : product
-        ),
         wishlist: wishlistProduct
           ? state.wishlist
           : [...state.wishlist, action.payload],
@@ -51,36 +22,21 @@ export const dataReducer = (state, action) => {
     case "REMOVE_FROM_WISHLIST":
       return {
         ...state,
-        allProducts: state.allProducts.map((product) =>
-          product.id === action.payload
-            ? { ...product, isWishlisted: false }
-            : product
-        ),
         wishlist: state.wishlist.filter(
           (wishlistItem) => wishlistItem.product.id !== action.payload
         ),
       };
 
     case "ADD_TO_CART":
-      const cartProduct = isProductExistsInList(state.cart, action.payload);
       return {
         ...state,
-        allProducts: state.allProducts.map((product) =>
-          product.id === action.payload.product.id
-            ? { ...product, isAddedToCart: true }
-            : product
-        ),
-        cart: cartProduct ? state.cart : [...state.cart, action.payload],
+        cart: [...state.cart, action.payload],
       };
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        allProducts: state.allProducts.map((product) =>
-          product.id === action.payload
-            ? { ...product, isAddedToCart: false }
-            : product
-        ),
+
         cart: state.cart.filter(
           (cartItem) => cartItem.product.id !== action.payload
         ),

@@ -17,17 +17,10 @@ const App = () => {
 
   const [isProductLoading, productLoadingError] = useAxios(
     "product",
-    "get",
-    null,
     "allProducts"
   );
-  const [isWishlistLoading, wishlistLoadingError] = useAxios(
-    "wishlist",
-    "get",
-    null,
-    null
-  );
-  const [isCartLoading, cartLoadingError] = useAxios("cart", "get", null, null);
+  const [isWishlistLoading, wishlistLoadingError] = useAxios("wishlist", null);
+  const [isCartLoading, cartLoadingError] = useAxios("cart", null);
 
   const wishlistLength = state.wishlist.filter((item) => item.isWishlisted)
     .length;

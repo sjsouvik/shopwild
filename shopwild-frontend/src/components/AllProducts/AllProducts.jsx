@@ -104,8 +104,12 @@ const AllProducts = (props) => {
                   actualPrice={product.actualPrice}
                   discount={product.discount}
                   buttonText="ADD TO CART"
-                  wishlist={product.isWishlisted}
-                  cart={product.isAddedToCart}
+                  wishlist={state.wishlist.some(
+                    (item) => item.product.id === product.id
+                  )}
+                  cart={state.cart.some(
+                    (item) => item.product.id === product.id
+                  )}
                   setToast={setToast}
                   setToastMessage={setToastMessage}
                 />

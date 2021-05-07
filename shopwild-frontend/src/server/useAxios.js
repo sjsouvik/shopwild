@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import serverRequests from "./serverRequests";
 import { useData } from "../context/data-context";
 
-const useAxios = (endpoint, type, dataToSend, propertyToInitialize) => {
+const useAxios = (endpoint, propertyToInitialize) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -19,7 +19,7 @@ const useAxios = (endpoint, type, dataToSend, propertyToInitialize) => {
             response: { data },
             error,
           } = await serverRequests({
-            requestType: type,
+            requestType: "get",
             url: `${process.env.REACT_APP_BACKEND}/${endpoint}`,
           });
 
@@ -32,37 +32,22 @@ const useAxios = (endpoint, type, dataToSend, propertyToInitialize) => {
 
           console.log(data[endpoint]);
         } else {
-          if (type === "get") {
-            const {
-              response: { data },
-              error,
-            } = await serverRequests({
-              requestType: type,
-              url: `${process.env.REACT_APP_BACKEND}/${endpoint}/607d92eee69f8b99745ef728`,
-            });
+          const {
+            response: { data },
+            error,
+          } = await serverRequests({
+            requestType: "get",
+            url: `${process.env.REACT_APP_BACKEND}/${endpoint}/607d92eee69f8b99745ef728`,
+          });
 
-            if (!error) {
-              dispatch({
-                type: "INITIALIZE_DATA",
-                payload: { name: endpoint, data: data[endpoint].products },
-              });
-            }
-
-            if (!error) {
-              dispatch({ type: `MARK_${endpoint.toUpperCase()}_PRODUCTS` });
-            }
-
-            console.log(data[endpoint].products);
-          } else if (type === "post") {
-            const {
-              response: { data },
-              error,
-            } = await serverRequests({
-              requestType: type,
-              url: `${process.env.REACT_APP_BACKEND}/${endpoint}/607d92eee69f8b99745ef728`,
-              data: dataToSend,
+          if (!error) {
+            dispatch({
+              type: "INITIALIZE_DATA",
+              payload: { name: endpoint, data: data[endpoint].products },
             });
           }
+
+          console.log(data[endpoint].products);
         }
       } catch (error) {
         setError(true);
