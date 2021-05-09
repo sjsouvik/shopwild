@@ -59,7 +59,7 @@ const Product = (props) => {
 
   const wishlistHandler = () => {
     if (isAddedToList(state.wishlist)) {
-      removeFromWishlistHandler();
+      return removeFromWishlistHandler();
     } else {
       const isItemWishlisted = addToWishlist(dispatch, { ...props });
       if (isItemWishlisted) {
