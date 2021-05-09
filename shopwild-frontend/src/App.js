@@ -24,7 +24,7 @@ const App = () => {
 
   const wishlistLength = state.wishlist.filter((item) => item.isWishlisted)
     .length;
-  const cartLength = state.cart.filter((item) => item.quantity > 0).length;
+  const cartLength = state.cart.length;
 
   return (
     <div className="App">

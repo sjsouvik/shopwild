@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./ProductDetails.css";
@@ -6,33 +5,40 @@ import "./ProductDetails.css";
 import { useData } from "../../context/data-context";
 
 import Toast from "../Toast/Toast";
+import { toastHandler, useDisableToast } from "../Toast/Toast";
+
+import {
+  addToCart,
+  addToWishlist,
+  removeFromWishlist,
+} from "../../server/serverUpdate";
 
 const ProductDetails = () => {
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
-
   const { state: productId } = useLocation();
   const navigate = useNavigate();
 
   const { state, dispatch } = useData();
 
-  const utilToast = (message) => {
-    setShowToast(true);
-    setToastMessage(message);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
+  const product = state.allProducts.find((product) => product.id === productId);
+
+  const isAddedToList = (list) => {
+    return list.some(({ product }) => product.id === productId);
   };
 
   const removeFromWishlistHandler = () => {
-    dispatch({ type: "REMOVE_FROM_WISHLIST", payload: product.id });
-    utilToast("Removed from wishlist!");
+    const isItemRemoved = removeFromWishlist(dispatch, product);
+
+    if (isItemRemoved) {
+      toastHandler(dispatch, "Removed from wishlist!");
+    }
   };
 
   const clickHandler = (e) => {
     if (e.target.textContent === "ADD TO CART") {
-      dispatch({ type: "ADD_TO_CART", payload: { ...product, qty: 1 } });
-      utilToast("Added to Cart!");
+      const isItemAdded = addToCart(dispatch, product);
+      if (isItemAdded) {
+        toastHandler(dispatch, "Added to Cart!");
+      }
     }
 
     if (e.target.textContent === "GO TO CART") {
@@ -41,15 +47,17 @@ const ProductDetails = () => {
   };
 
   const wishlistHandler = () => {
-    if (product.isWishlisted) {
+    if (isAddedToList(state.wishlist)) {
       removeFromWishlistHandler();
     } else {
-      dispatch({ type: "ADD_TO_WISHLIST", payload: product });
-      utilToast("Items has been wishlisted!");
+      const isItemAdded = addToWishlist(dispatch, product);
+      if (isItemAdded) {
+        toastHandler(dispatch, "Items has been wishlisted!");
+      }
     }
   };
 
-  const product = state.allProducts.find((product) => product.id === productId);
+  useDisableToast();
 
   return (
     <div className="card product">
@@ -77,18 +85,18 @@ const ProductDetails = () => {
         </p>
         <div style={{ textAlign: "left" }}>
           <button className="btn btn-primary btn-lg" onClick={clickHandler}>
-            {product?.isAddedToCart ? "GO TO CART" : "ADD TO CART"}
+            {isAddedToList(state.cart) ? "GO TO CART" : "ADD TO CART"}
           </button>
           <button
             className="btn btn-outline-primary btn-lg"
             onClick={wishlistHandler}
           >
-            {product?.isWishlisted ? "WISHLISTED" : "WISHLIST"}
+            {isAddedToList(state.wishlist) ? "WISHLISTED" : "WISHLIST"}
           </button>
         </div>
       </div>
 
-      <Toast show={showToast} message={toastMessage} />
+      <Toast />
     </div>
   );
 };

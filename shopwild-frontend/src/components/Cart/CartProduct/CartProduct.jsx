@@ -2,46 +2,27 @@ import { useData } from "../../../context/data-context";
 
 import serverRequests from "../../../server/serverRequests";
 
+import { toastHandler, useDisableToast } from "../../Toast/Toast";
+
+import { addToWishlist, removeFromCart } from "../../../server/serverUpdate";
+
 const CartProduct = (props) => {
   const { dispatch } = useData();
 
-  const utilToast = (setToast, setToastMessage, message) => {
-    setToast(true);
-    setToastMessage(message);
-    setTimeout(() => {
-      setToast(false);
-    }, 2000);
+  const removeFromCartHandler = () => {
+    const isItemRemoved = removeFromCart(dispatch, { ...props });
+    if (isItemRemoved) {
+      toastHandler(dispatch, "Removed from Cart!");
+    }
   };
 
-  const clickHandler = async (e) => {
-    if (e.target.textContent === "MOVE TO WISHLIST") {
-      const { error } = await serverRequests({
-        requestType: "post",
-        url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-        data: { products: [{ product: props.id, isWishlisted: true }] },
-      });
-
-      if (!error) {
-        dispatch({
-          type: "ADD_TO_WISHLIST",
-          payload: { product: { ...props }, isWishlisted: true },
-        });
-        utilToast(props.setToast, props.setToastMessage, "Moved to Wishlist!");
+  const moveToWishlistHandler = () => {
+    const isItemAdded = addToWishlist(dispatch, { ...props });
+    if (isItemAdded) {
+      const isItemRemoved = removeFromCart(dispatch, { ...props });
+      if (isItemRemoved) {
+        toastHandler(dispatch, "Moved to Wishlist!");
       }
-    }
-
-    const { error } = await serverRequests({
-      requestType: "delete",
-      url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
-      data: { product: props.id },
-    });
-
-    if (!error) {
-      dispatch({ type: "REMOVE_FROM_CART", payload: props.id });
-    }
-
-    if (e.target.textContent === "REMOVE") {
-      utilToast(props.setToast, props.setToastMessage, "Removed from Cart!");
     }
   };
 
@@ -72,6 +53,8 @@ const CartProduct = (props) => {
       }
     }
   };
+
+  useDisableToast();
 
   return (
     <div className="card horizontal">
@@ -114,13 +97,13 @@ const CartProduct = (props) => {
         <div className="horizontal-section">
           <button
             className="btn btn-sm btn-danger"
-            onClick={(e) => clickHandler(e)}
+            onClick={removeFromCartHandler}
           >
             REMOVE
           </button>
           <button
             className="btn btn-sm btn-primary"
-            onClick={(e) => clickHandler(e)}
+            onClick={moveToWishlistHandler}
           >
             MOVE TO WISHLIST
           </button>

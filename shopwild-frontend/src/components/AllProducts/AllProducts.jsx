@@ -15,8 +15,6 @@ const SideMenu = (props) => {
 };
 
 const AllProducts = (props) => {
-  const [toast, setToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
   const [openFilter, setOpenFilter] = useState(false);
   const [searchedText, setSearchedText] = useState("");
 
@@ -95,23 +93,8 @@ const AllProducts = (props) => {
               {filteredProducts.map((product) => (
                 <Product
                   key={product.id}
-                  id={product.id}
-                  brandName={product.brandName}
-                  description={product.description}
-                  details={product.details}
-                  image={product.image}
-                  offeredPrice={product.offeredPrice}
-                  actualPrice={product.actualPrice}
-                  discount={product.discount}
+                  {...product}
                   buttonText="ADD TO CART"
-                  wishlist={state.wishlist.some(
-                    (item) => item.product.id === product.id
-                  )}
-                  cart={state.cart.some(
-                    (item) => item.product.id === product.id
-                  )}
-                  setToast={setToast}
-                  setToastMessage={setToastMessage}
                 />
               ))}
             </div>
@@ -139,7 +122,7 @@ const AllProducts = (props) => {
             ></ion-icon>
           )}
         </div>
-        <Toast show={toast} message={toastMessage} />
+        <Toast />
       </div>
     </div>
   );

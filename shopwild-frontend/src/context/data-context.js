@@ -8,6 +8,7 @@ const dataState = {
   allProducts: [],
   wishlist: [],
   cart: [],
+  toastMessage: null,
 };
 
 const DataProvider = ({ children }) => {

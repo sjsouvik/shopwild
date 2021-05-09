@@ -1,52 +1,55 @@
-export const dataReducer = (state, action) => {
-  switch (action.type) {
+export const dataReducer = (state, { type, payload }) => {
+  switch (type) {
     case "INITIALIZE_DATA":
       return {
         ...state,
-        [action.payload.name]: action.payload.data,
+        [payload.name]: payload.data,
+      };
+
+    case "ENABLE_OR_DISABLE_TOAST":
+      return {
+        ...state,
+        toastMessage: payload.message,
       };
 
     case "ADD_TO_WISHLIST":
-      const wishlistProduct = isProductExistsInList(
-        state.wishlist,
-        action.payload
-      );
-      console.log(state.wishlist, wishlistProduct);
+      const wishlistProduct = isProductExistsInList(state.wishlist, payload);
+
       return {
         ...state,
         wishlist: wishlistProduct
           ? state.wishlist
-          : [...state.wishlist, action.payload],
+          : [...state.wishlist, payload],
       };
 
     case "REMOVE_FROM_WISHLIST":
       return {
         ...state,
         wishlist: state.wishlist.filter(
-          (wishlistItem) => wishlistItem.product.id !== action.payload
+          (wishlistItem) => wishlistItem.product.id !== payload
         ),
       };
 
     case "ADD_TO_CART":
+      const cartProduct = isProductExistsInList(state.cart, payload);
+
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: cartProduct ? state.cart : [...state.cart, payload],
       };
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
 
-        cart: state.cart.filter(
-          (cartItem) => cartItem.product.id !== action.payload
-        ),
+        cart: state.cart.filter((cartItem) => cartItem.product.id !== payload),
       };
 
     case "INCREASE_QUANTITY":
       return {
         ...state,
         cart: state.cart.map((cartItem) =>
-          cartItem.product.id === action.payload
+          cartItem.product.id === payload
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         ),
@@ -56,7 +59,7 @@ export const dataReducer = (state, action) => {
       return {
         ...state,
         cart: state.cart.map((cartItem) =>
-          cartItem.product.id === action.payload
+          cartItem.product.id === payload
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         ),

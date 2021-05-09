@@ -34,6 +34,9 @@ const serverRequests = async ({ requestType, data, url }) => {
       } catch (error) {
         return { error: true };
       }
+
+    default:
+      return;
   }
 };
 

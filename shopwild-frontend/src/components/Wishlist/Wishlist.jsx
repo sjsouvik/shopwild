@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useData } from "../../context/data-context";
 
 import Product from "../AllProducts/Product/Product";
@@ -6,8 +5,6 @@ import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
 const Wishlist = (props) => {
-  const [toast, setToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
   const value = useData();
 
   return (
@@ -15,8 +12,7 @@ const Wishlist = (props) => {
       <h2>
         My Wishlist{" "}
         <span style={{ fontSize: "1rem", fontWeight: "200" }}>
-          {value.state.wishlist.filter((item) => item.isWishlisted).length}{" "}
-          item(s)
+          {value.state.wishlist.length} item(s)
         </span>
       </h2>
 
@@ -25,28 +21,12 @@ const Wishlist = (props) => {
       ) : (
         <div className="card-row">
           {value.state.wishlist.map(({ product }) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              brandName={product.brandName}
-              description={product.description}
-              image={product.image}
-              offeredPrice={product.offeredPrice}
-              actualPrice={product.actualPrice}
-              discount={product.discount}
-              buttonText={
-                value.state.cart.some((item) => item.product.id === product.id)
-                  ? "GO TO CART"
-                  : "MOVE TO CART"
-              }
-              setToast={setToast}
-              setToastMessage={setToastMessage}
-            />
+            <Product key={product.id} {...product} buttonText="MOVE TO CART" />
           ))}
         </div>
       )}
 
-      <Toast show={toast} message={toastMessage} />
+      <Toast />
     </div>
   );
 };

@@ -4,104 +4,71 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { useData } from "../../../context/data-context";
 
-import serverRequests from "../../../server/serverRequests";
+import { toastHandler, useDisableToast } from "../../Toast/Toast";
+
+import {
+  addToWishlist,
+  removeFromWishlist,
+  addToCart,
+} from "../../../server/serverUpdate";
 
 const Product = (props) => {
-  const { dispatch } = useData();
+  const { state, dispatch } = useData();
   const navigate = useNavigate();
 
-  const utilToast = (setToast, setToastMessage, message) => {
-    setToast(true);
-    setToastMessage(message);
-    setTimeout(() => {
-      setToast(false);
-    }, 2000);
+  const isAddedToList = (list) => {
+    return list.some(({ product }) => product.id === props.id);
   };
 
-  const clickHandler = async (e) => {
-    if (e.target.textContent === "ADD TO CART") {
-      const { error } = await serverRequests({
-        requestType: "post",
-        url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
-        data: { products: [{ product: props.id, quantity: 1 }] },
-      });
-
-      if (!error) {
-        dispatch({
-          type: "ADD_TO_CART",
-          payload: { product: { ...props }, quantity: 1 },
-        });
-        utilToast(props.setToast, props.setToastMessage, "Added to Cart!");
-      }
-    } else if (e.target.textContent === "MOVE TO CART") {
-      const { error } = await serverRequests({
-        requestType: "post",
-        url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
-        data: { products: [{ product: props.id, quantity: 1 }] },
-      });
-
-      if (!error) {
-        dispatch({
-          type: "ADD_TO_CART",
-          payload: { product: { ...props }, quantity: 1 },
-        });
-
-        const { error } = await serverRequests({
-          requestType: "delete",
-          url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-          data: { product: props.id },
-        });
-
-        if (!error) {
-          dispatch({ type: "REMOVE_FROM_WISHLIST", payload: props.id });
-          utilToast(props.setToast, props.setToastMessage, "Moved to Cart!");
+  const clickHandler = (e) => {
+    switch (e.target.textContent) {
+      case "ADD TO CART":
+        const isItemAdded = addToCart(dispatch, { ...props });
+        if (isItemAdded) {
+          toastHandler(dispatch, "Added to Cart!");
         }
-      }
-    } else if (e.target.textContent === "GO TO CART") {
-      navigate("/cart");
+        break;
+
+      case "MOVE TO CART":
+        const isItemAddedToCart = addToCart(dispatch, { ...props });
+
+        if (isItemAddedToCart) {
+          const isItemRemoved = removeFromWishlist(dispatch, { ...props });
+          if (isItemRemoved) {
+            toastHandler(dispatch, "Moved to Cart!");
+          }
+        }
+        break;
+
+      case "GO TO CART":
+        navigate("/cart");
+        break;
+
+      default:
+        return;
     }
   };
 
-  const removeFromWishlistHandler = async () => {
-    const { error } = await serverRequests({
-      requestType: "delete",
-      url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-      data: { product: props.id },
-    });
+  const removeFromWishlistHandler = () => {
+    const isItemRemoved = removeFromWishlist(dispatch, { ...props });
 
-    if (!error) {
-      dispatch({ type: "REMOVE_FROM_WISHLIST", payload: props.id });
-      utilToast(
-        props.setToast,
-        props.setToastMessage,
-        "Removed from wishlist!"
-      );
+    if (isItemRemoved) {
+      toastHandler(dispatch, "Removed from wishlist!");
     }
   };
 
-  const wishlistHandler = async () => {
-    if (props.wishlist) {
+  const wishlistHandler = () => {
+    if (isAddedToList(state.wishlist)) {
       removeFromWishlistHandler();
     } else {
-      const { error } = await serverRequests({
-        requestType: "post",
-        url: `${process.env.REACT_APP_BACKEND}/wishlist/607d92eee69f8b99745ef728`,
-        data: { products: [{ product: props.id, isWishlisted: true }] },
-      });
-
-      if (!error) {
-        dispatch({
-          type: "ADD_TO_WISHLIST",
-          payload: { product: { ...props }, isWishlisted: true },
-        });
-        utilToast(
-          props.setToast,
-          props.setToastMessage,
-          "Items has been wishlisted!"
-        );
+      const isItemWishlisted = addToWishlist(dispatch, { ...props });
+      if (isItemWishlisted) {
+        toastHandler(dispatch, "Items has been wishlisted!");
       }
     }
   };
+
+  useDisableToast();
 
   return (
     <div className="card vertical">
@@ -114,7 +81,7 @@ const Product = (props) => {
       >
         <ion-icon
           name="heart"
-          style={props.wishlist ? { color: "red" } : null}
+          style={isAddedToList(state.wishlist) ? { color: "red" } : null}
         ></ion-icon>
       </span>
       <span
@@ -159,7 +126,7 @@ const Product = (props) => {
           style={{ width: "100%", margin: "0" }}
           onClick={(e) => clickHandler(e)}
         >
-          {props.cart ? "GO TO CART" : props.buttonText}
+          {isAddedToList(state.cart) ? "GO TO CART" : props.buttonText}
         </button>
       </div>
     </div>
