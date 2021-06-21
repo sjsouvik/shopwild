@@ -34,6 +34,7 @@ exports.createUpdateWishlist = async (req, res) => {
       if (wishlistItem) {
         await Wishlist.updateOne(
           {
+            user: req.user._id,
             "products.product": wishlistUpdates.products[0].product,
           },
           {

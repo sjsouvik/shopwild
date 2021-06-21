@@ -43,15 +43,11 @@ exports.createUpdateCart = async (req, res) => {
       let cartItem = cart.products.find(
         (item) => item.product == cartUpdates.products[0].product
       );
-      // cartItem = Cart.findOne({
-      //   "products.product": {
-      //     $eleMatch: { product: cartUpdates.products[0].product },
-      //   },
-      // });
 
       if (cartItem) {
         await Cart.updateOne(
           {
+            user: req.user._id,
             "products.product": cartUpdates.products[0].product,
           },
           {
