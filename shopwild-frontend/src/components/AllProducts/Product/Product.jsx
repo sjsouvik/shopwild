@@ -3,6 +3,7 @@ import "./Product.css";
 import { useNavigate, Link } from "react-router-dom";
 
 import { useData } from "../../../context/data-context";
+import { useAuth } from "../../../context/auth-context";
 
 import { toastHandler, useDisableToast } from "../../Toast/Toast";
 
@@ -16,6 +17,8 @@ const Product = (props) => {
   const { state, dispatch } = useData();
   const navigate = useNavigate();
 
+  const { authToken, authUser } = useAuth();
+
   const isAddedToList = (list) => {
     return list.some(({ product }) => product.id === props.id);
   };
@@ -23,17 +26,35 @@ const Product = (props) => {
   const clickHandler = (e) => {
     switch (e.target.textContent) {
       case "ADD TO CART":
-        const isItemAdded = addToCart(dispatch, { ...props });
+        if (!authToken) {
+          return toastHandler(dispatch, "Login to add to Cart!");
+        }
+        const isItemAdded = addToCart(
+          dispatch,
+          { ...props },
+          authUser._id,
+          authToken
+        );
         if (isItemAdded) {
           toastHandler(dispatch, "Added to Cart!");
         }
         break;
 
       case "MOVE TO CART":
-        const isItemAddedToCart = addToCart(dispatch, { ...props });
+        const isItemAddedToCart = addToCart(
+          dispatch,
+          { ...props },
+          authUser._id,
+          authToken
+        );
 
         if (isItemAddedToCart) {
-          const isItemRemoved = removeFromWishlist(dispatch, { ...props });
+          const isItemRemoved = removeFromWishlist(
+            dispatch,
+            { ...props },
+            authUser._id,
+            authToken
+          );
           if (isItemRemoved) {
             toastHandler(dispatch, "Moved to Cart!");
           }
@@ -50,7 +71,12 @@ const Product = (props) => {
   };
 
   const removeFromWishlistHandler = () => {
-    const isItemRemoved = removeFromWishlist(dispatch, { ...props });
+    const isItemRemoved = removeFromWishlist(
+      dispatch,
+      { ...props },
+      authUser._id,
+      authToken
+    );
 
     if (isItemRemoved) {
       toastHandler(dispatch, "Removed from wishlist!");
@@ -61,7 +87,16 @@ const Product = (props) => {
     if (isAddedToList(state.wishlist)) {
       return removeFromWishlistHandler();
     } else {
-      const isItemWishlisted = addToWishlist(dispatch, { ...props });
+      if (!authToken) {
+        return toastHandler(dispatch, "Login to add to Wishlist!");
+      }
+
+      const isItemWishlisted = addToWishlist(
+        dispatch,
+        { ...props },
+        authUser._id,
+        authToken
+      );
       if (isItemWishlisted) {
         toastHandler(dispatch, "Items has been wishlisted!");
       }
@@ -81,7 +116,9 @@ const Product = (props) => {
       >
         <ion-icon
           name="heart"
-          style={isAddedToList(state.wishlist) ? { color: "red" } : null}
+          style={
+            authToken && isAddedToList(state.wishlist) ? { color: "red" } : null
+          }
         ></ion-icon>
       </span>
       <span
@@ -126,7 +163,9 @@ const Product = (props) => {
           style={{ width: "100%", margin: "0" }}
           onClick={(e) => clickHandler(e)}
         >
-          {isAddedToList(state.cart) ? "GO TO CART" : props.buttonText}
+          {authToken && isAddedToList(state.cart)
+            ? "GO TO CART"
+            : props.buttonText}
         </button>
       </div>
     </div>

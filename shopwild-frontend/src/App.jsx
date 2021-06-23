@@ -1,8 +1,12 @@
-import { NavLink, Link, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 import NavBar from "./components/NavBar/NavBar";
+import Profile from "./components/Profile/Profile";
 import AllProducts from "./components/AllProducts/AllProducts";
 import WishList from "./components/Wishlist/Wishlist";
 import Cart from "./components/Cart/Cart";
@@ -29,12 +33,18 @@ const App = () => {
             path="/"
             element={<AllProducts loading={isProductLoading} />}
           />
-          <Route
-            path="wishlist"
+          <PrivateRoute
+            path="/wishlist"
             element={<WishList loading={isWishlistLoading} />}
           />
-          <Route path="cart" element={<Cart loading={isCartLoading} />} />
+          <PrivateRoute
+            path="/cart"
+            element={<Cart loading={isCartLoading} />}
+          />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

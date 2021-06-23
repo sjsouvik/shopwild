@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./ProductDetails.css";
 
 import { useData } from "../../context/data-context";
+import { useAuth } from "../../context/auth-context";
 
 import Toast from "../Toast/Toast";
 import { toastHandler, useDisableToast } from "../Toast/Toast";
@@ -18,6 +19,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const { state, dispatch } = useData();
+  const { authToken, authUser } = useAuth();
 
   const product = state.allProducts.find((product) => product.id === productId);
 
@@ -26,7 +28,12 @@ const ProductDetails = () => {
   };
 
   const removeFromWishlistHandler = () => {
-    const isItemRemoved = removeFromWishlist(dispatch, product);
+    const isItemRemoved = removeFromWishlist(
+      dispatch,
+      product,
+      authUser._id,
+      authToken
+    );
 
     if (isItemRemoved) {
       toastHandler(dispatch, "Removed from wishlist!");
@@ -35,7 +42,11 @@ const ProductDetails = () => {
 
   const clickHandler = (e) => {
     if (e.target.textContent === "ADD TO CART") {
-      const isItemAdded = addToCart(dispatch, product);
+      if (!authToken) {
+        return toastHandler(dispatch, "Login to add to Cart!");
+      }
+
+      const isItemAdded = addToCart(dispatch, product, authUser._id, authToken);
       if (isItemAdded) {
         toastHandler(dispatch, "Added to Cart!");
       }
@@ -50,7 +61,16 @@ const ProductDetails = () => {
     if (isAddedToList(state.wishlist)) {
       removeFromWishlistHandler();
     } else {
-      const isItemAdded = addToWishlist(dispatch, product);
+      if (!authToken) {
+        return toastHandler(dispatch, "Login to add to Wishlist!");
+      }
+
+      const isItemAdded = addToWishlist(
+        dispatch,
+        product,
+        authUser._id,
+        authToken
+      );
       if (isItemAdded) {
         toastHandler(dispatch, "Items has been wishlisted!");
       }
@@ -85,13 +105,17 @@ const ProductDetails = () => {
         </p>
         <div style={{ textAlign: "left" }}>
           <button className="btn btn-primary btn-lg" onClick={clickHandler}>
-            {isAddedToList(state.cart) ? "GO TO CART" : "ADD TO CART"}
+            {authToken && isAddedToList(state.cart)
+              ? "GO TO CART"
+              : "ADD TO CART"}
           </button>
           <button
             className="btn btn-outline-primary btn-lg"
             onClick={wishlistHandler}
           >
-            {isAddedToList(state.wishlist) ? "WISHLISTED" : "WISHLIST"}
+            {authToken && isAddedToList(state.wishlist)
+              ? "WISHLISTED"
+              : "WISHLIST"}
           </button>
         </div>
       </div>

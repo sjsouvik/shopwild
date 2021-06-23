@@ -1,4 +1,5 @@
 import { useData } from "../../../context/data-context";
+import { useAuth } from "../../../context/auth-context";
 
 import serverRequests from "../../../server/serverRequests";
 
@@ -8,18 +9,33 @@ import { addToWishlist, removeFromCart } from "../../../server/serverUpdate";
 
 const CartProduct = (props) => {
   const { dispatch } = useData();
+  const {
+    authUser: { _id },
+    authToken,
+  } = useAuth();
 
   const removeFromCartHandler = () => {
-    const isItemRemoved = removeFromCart(dispatch, { ...props });
+    const isItemRemoved = removeFromCart(
+      dispatch,
+      { ...props },
+      _id,
+      authToken
+    );
     if (isItemRemoved) {
       toastHandler(dispatch, "Removed from Cart!");
     }
   };
 
   const moveToWishlistHandler = () => {
-    const isItemAdded = addToWishlist(dispatch, { ...props });
+    const isItemAdded = addToWishlist(dispatch, { ...props }, _id, authToken);
     if (isItemAdded) {
-      const isItemRemoved = removeFromCart(dispatch, { ...props });
+      const isItemRemoved = removeFromCart(
+        dispatch,
+        { ...props },
+        _id,
+        authToken
+      );
+
       if (isItemRemoved) {
         toastHandler(dispatch, "Moved to Wishlist!");
       }
@@ -27,28 +43,32 @@ const CartProduct = (props) => {
   };
 
   const increaseQuantityHandler = async () => {
-    const { error } = await serverRequests({
+    const { statusCode } = await serverRequests({
       requestType: "post",
-      url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+      url: `${process.env.REACT_APP_BACKEND}/cart/update/${_id}`,
       data: {
-        products: [{ product: props.id, quantity: props.quantity + 1 }],
+        product: props.id,
+        quantity: props.quantity + 1,
       },
+      token: { headers: { authorization: `Bearer ${authToken}` } },
     });
-    if (!error) {
+    if (statusCode === 200) {
       dispatch({ type: "INCREASE_QUANTITY", payload: props.id });
     }
   };
 
   const decreaseQuantityHandler = async () => {
     if (props.quantity > 1) {
-      const { error } = await serverRequests({
+      const { statusCode } = await serverRequests({
         requestType: "post",
-        url: `${process.env.REACT_APP_BACKEND}/cart/607d92eee69f8b99745ef728`,
+        url: `${process.env.REACT_APP_BACKEND}/cart/update/${_id}`,
         data: {
-          products: [{ product: props.id, quantity: props.quantity - 1 }],
+          product: props.id,
+          quantity: props.quantity - 1,
         },
+        token: { headers: { authorization: `Bearer ${authToken}` } },
       });
-      if (!error) {
+      if (statusCode === 200) {
         dispatch({ type: "DECREASE_QUANTITY", payload: props.id });
       }
     }

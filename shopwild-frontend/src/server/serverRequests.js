@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const serverRequests = async ({ requestType, data, url }) => {
+const serverRequests = async ({ requestType, data, url, token }) => {
   switch (requestType) {
     case "get":
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, token);
         return response.status === 200
           ? { response, error: false }
           : { error: true };
@@ -14,20 +14,17 @@ const serverRequests = async ({ requestType, data, url }) => {
 
     case "post":
       try {
-        const response = await axios.post(url, data);
+        const response = await axios.post(url, data, token);
         return response.status === 200
-          ? { response, error: false }
-          : { error: true };
+          ? { response, statusCode: response.status }
+          : { response: null, statusCode: 400 };
       } catch (error) {
-        return { error: true };
+        return { response: null, statusCode: error.response.status };
       }
 
     case "delete":
       try {
-        const response = await axios.delete(url, {
-          headers: { "Content-Type": "application/json" },
-          data: data,
-        });
+        const response = await axios.delete(url, token);
         return response.status === 200
           ? { response, error: false }
           : { error: true };

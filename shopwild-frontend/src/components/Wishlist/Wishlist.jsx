@@ -4,25 +4,49 @@ import Product from "../AllProducts/Product/Product";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
+import Empty from "../../assets/empty.svg";
+
+import "./Wishlist.css";
+
 const Wishlist = (props) => {
-  const value = useData();
+  const {
+    state: { wishlist },
+  } = useData();
 
   return (
     <div>
       <h2>
         My Wishlist{" "}
         <span style={{ fontSize: "1rem", fontWeight: "200" }}>
-          {value.state.wishlist.length} item(s)
+          {wishlist.length} item(s)
         </span>
       </h2>
 
       {props.loading ? (
         <Loader />
       ) : (
-        <div className="card-row">
-          {value.state.wishlist.map(({ product }) => (
-            <Product key={product.id} {...product} buttonText="MOVE TO CART" />
-          ))}
+        <div>
+          {wishlist.length === 0 && (
+            <div>
+              <h3>Wishlist is empty :(</h3>
+              <img
+                src={Empty}
+                alt="empty wishlist"
+                className="empty-wishlist"
+              />
+            </div>
+          )}
+          {wishlist.length > 0 && (
+            <div className="card-row">
+              {wishlist.map(({ product }) => (
+                <Product
+                  key={product.id}
+                  {...product}
+                  buttonText="MOVE TO CART"
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
 

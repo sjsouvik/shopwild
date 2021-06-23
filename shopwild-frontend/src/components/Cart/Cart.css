@@ -5,3 +5,8 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.empty-cart {
+  width: 40%;
+  margin: auto;
+}

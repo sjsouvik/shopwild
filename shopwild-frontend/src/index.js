@@ -7,18 +7,21 @@ import "./index.css";
 import App from "./App";
 import DataProvider from "./context/data-context";
 import FilterProvider from "./context/filter-context";
+import AuthProvider from "./context/auth-context";
 
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <StrictMode>
-    <DataProvider>
-      <FilterProvider>
-        <Router>
-          <App />
-        </Router>
-      </FilterProvider>
-    </DataProvider>
+    <Router>
+      <AuthProvider>
+        <DataProvider>
+          <FilterProvider>
+            <App />
+          </FilterProvider>
+        </DataProvider>
+      </AuthProvider>
+    </Router>
   </StrictMode>,
   rootElement
 );

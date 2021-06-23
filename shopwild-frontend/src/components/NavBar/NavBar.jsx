@@ -1,11 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 
 import { useData } from "../../context/data-context";
+import { useAuth } from "../../context/auth-context";
 
 const NavBar = () => {
   const {
     state: { wishlist, cart },
   } = useData();
+
+  const { authToken, authUser } = useAuth();
 
   const wishlistLength = wishlist.length;
   const cartLength = cart.length;
@@ -24,14 +27,21 @@ const NavBar = () => {
               </NavLink>{" "}
             </li> */}
         <li className="nav-item">
-          <ion-icon name="person"></ion-icon>
-          <div style={{ fontSize: "0.85rem" }}>Log In</div>
+          <NavLink
+            to={authToken ? "/profile" : "/login"}
+            activeStyle={{ fontWeight: "bold" }}
+          >
+            <ion-icon name="person"></ion-icon>
+            <div style={{ fontSize: "0.85rem" }}>
+              {authToken ? `Hi, ${authUser?.firstName}` : "Log In"}
+            </div>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="wishlist" activeStyle={{ fontWeight: "bold" }}>
+          <NavLink to="/wishlist" activeStyle={{ fontWeight: "bold" }}>
             <div style={{ position: "relative" }}>
               <ion-icon name="heart"></ion-icon>
-              {wishlistLength > 0 && (
+              {authToken && wishlistLength > 0 && (
                 <span className="badge rounded-pill bg-light bg-wishlist">
                   {wishlistLength}
                 </span>
@@ -41,10 +51,10 @@ const NavBar = () => {
           </NavLink>{" "}
         </li>
         <li className="nav-item">
-          <NavLink to="cart" activeStyle={{ fontWeight: "bold" }}>
+          <NavLink to="/cart" activeStyle={{ fontWeight: "bold" }}>
             <div style={{ position: "relative" }}>
               <ion-icon name="cart"></ion-icon>
-              {cartLength > 0 && (
+              {authToken && cartLength > 0 && (
                 <span class="badge rounded-pill bg-light bg-cart">
                   {cartLength}
                 </span>
@@ -53,10 +63,6 @@ const NavBar = () => {
             <div style={{ fontSize: "0.85rem" }}>Cart</div>
           </NavLink>
         </li>
-        {/* 
-            <li className="nav-item">
-              <button className="btn btn-secondary">SIGN UP</button>
-            </li> */}
       </ul>
     </nav>
   );

@@ -26,7 +26,7 @@ export const dataReducer = (state, { type, payload }) => {
       return {
         ...state,
         wishlist: state.wishlist.filter(
-          (wishlistItem) => wishlistItem.product.id !== payload
+          (wishlistItem) => wishlistItem.product._id !== payload
         ),
       };
 
@@ -42,7 +42,7 @@ export const dataReducer = (state, { type, payload }) => {
       return {
         ...state,
 
-        cart: state.cart.filter((cartItem) => cartItem.product.id !== payload),
+        cart: state.cart.filter((cartItem) => cartItem.product._id !== payload),
       };
 
     case "INCREASE_QUANTITY":

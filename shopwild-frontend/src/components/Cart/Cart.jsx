@@ -4,6 +4,8 @@ import CartProduct from "./CartProduct/CartProduct";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
+import EmptyCart from "../../assets/empty_cart.svg";
+
 import "./Cart.css";
 
 const Cart = (props) => {
@@ -28,7 +30,12 @@ const Cart = (props) => {
         <Loader />
       ) : (
         <div>
-          {cart.length === 0 && <div>Cart is empty :(</div>}
+          {cart.length === 0 && (
+            <div>
+              <h3>Cart is empty :(</h3>
+              <img src={EmptyCart} alt="empty cart" className="empty-cart" />
+            </div>
+          )}
           {cart.length > 0 && (
             <div className="cart-body">
               <div>

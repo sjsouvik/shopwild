@@ -3,12 +3,16 @@ import { useState } from "react";
 import { useData } from "../../context/data-context";
 import { useFilter } from "../../context/filter-context";
 
+import useAxios from "../../server/useAxios";
+
 import Product from "./Product/Product";
 import SideBar from "./SideBar/SideBar";
 import SideBarContent from "./SideBar/SideBarContent/SideBarContent";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 import "./AllProducts.css";
+
+import Empty from "../../assets/empty.svg";
 
 const SideMenu = (props) => {
   return <nav className="side-menu">{props.children}</nav>;
@@ -63,6 +67,9 @@ const AllProducts = (props) => {
 
   const filteredProducts = filterProducts(state.allProducts);
 
+  const [isWishlistLoading, wishlistLoadingError] = useAxios("wishlist", null);
+  const [isCartLoading, cartLoadingError] = useAxios("cart", null);
+
   return (
     <div className="grid-row">
       <SideMenu>
@@ -82,12 +89,19 @@ const AllProducts = (props) => {
         ) : (
           <div>
             {filteredProducts.length === 0 && (
-              <h3>
-                No Products found{" "}
-                <em>
-                  <q>{searchedText}</q>
-                </em>
-              </h3>
+              <div>
+                <h3>
+                  No Products found{" "}
+                  <em>
+                    <q>{searchedText}</q>
+                  </em>
+                </h3>
+                <img
+                  src={Empty}
+                  alt="empty wishlist"
+                  className="empty-wishlist"
+                />
+              </div>
             )}
             <div className="card-row">
               {filteredProducts.map((product) => (

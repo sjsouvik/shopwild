@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 
 import serverRequests from "./serverRequests";
 import { useData } from "../context/data-context";
+import { useAuth } from "../context/auth-context";
 
 const useAxios = (endpoint, propertyToInitialize) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const { dispatch } = useData();
+  const { authUser, authToken } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -37,17 +39,18 @@ const useAxios = (endpoint, propertyToInitialize) => {
             error,
           } = await serverRequests({
             requestType: "get",
-            url: `${process.env.REACT_APP_BACKEND}/${endpoint}/607d92eee69f8b99745ef728`,
+            url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser._id}`,
+            token: { headers: { authorization: `Bearer ${authToken}` } },
           });
 
           if (!error) {
             dispatch({
               type: "INITIALIZE_DATA",
-              payload: { name: endpoint, data: data[endpoint].products },
+              payload: { name: endpoint, data: data[endpoint] },
             });
           }
 
-          console.log(data[endpoint].products);
+          console.log(data[endpoint]);
         }
       } catch (error) {
         setError(true);
