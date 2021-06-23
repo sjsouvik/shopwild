@@ -3,9 +3,9 @@ const Wishlist = require("../models/wishlist");
 
 exports.getWishlist = async (req, res) => {
   try {
-    const wishlist = await Wishlist.findOne({ user: req.user._id })
+    const wishlist = await Wishlist.find({ user: req.user._id })
       .populate("user")
-      .populate("products.product");
+      .populate("product");
     res.json({ wishlist });
   } catch (error) {
     res.status(404).json({
@@ -15,44 +15,12 @@ exports.getWishlist = async (req, res) => {
   }
 };
 
-exports.createUpdateWishlist = async (req, res) => {
+exports.addItemToWishlist = async (req, res) => {
   try {
-    const wishlistUpdates = req.body;
-    let wishlist = await Wishlist.findOne({ user: req.user._id });
-
-    wishlistUpdates.user = req.user;
-
-    if (wishlist === null) {
-      wishlist = new Wishlist(wishlistUpdates);
-      wishlist = await wishlist.save();
-      return res.json({ message: "Created wishlist for the user", wishlist });
-    } else {
-      const wishlistItem = wishlist.products.find(
-        (item) => item.product == wishlistUpdates.products[0].product
-      );
-
-      if (wishlistItem) {
-        await Wishlist.updateOne(
-          {
-            user: req.user._id,
-            "products.product": wishlistUpdates.products[0].product,
-          },
-          {
-            $set: {
-              "products.$.isWishlisted":
-                wishlistUpdates.products[0].isWishlisted,
-            },
-          }
-        );
-      } else {
-        await Wishlist.updateOne(
-          { user: wishlistUpdates.user },
-          { $push: { products: wishlistUpdates.products[0] } }
-        );
-      }
-    }
-
-    res.json({ message: "Successfully updated the wishlist" });
+    let newItem = new Wishlist(req.body);
+    newItem.user = req.user._id;
+    const savedItem = await newItem.save();
+    res.json({ savedItem });
   } catch (error) {
     res
       .status(400)
@@ -62,10 +30,8 @@ exports.createUpdateWishlist = async (req, res) => {
 
 exports.deleteItemFromWishlist = async (req, res) => {
   try {
-    await Wishlist.updateOne(
-      { user: req.user },
-      { $pull: { products: req.body } }
-    );
+    await Wishlist.deleteOne({ user: req.user._id, product: req.body.product });
+
     res.json({ message: "Successfully deleted the item from wishlist" });
   } catch (error) {
     res

@@ -1,22 +1,17 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
-const productSchemaInCart = mongoose.Schema({
-  product: {
-    type: ObjectId,
-    ref: "Product",
-    required: [true, "Please add the product id to cart"],
-    unique: [true, "Please add unique product id to cart"],
-  },
-  quantity: {
-    type: Number,
-    required: [true, "Please add the quantity of the product"],
-  },
-});
-
-const cartSchema = mongoose.Schema(
+const cartSchema = new mongoose.Schema(
   {
-    products: [productSchemaInCart],
+    product: {
+      type: ObjectId,
+      ref: "Product",
+      required: [true, "Please add the product id to add to cart"],
+    },
+    quantity: {
+      type: Number,
+      required: [true, "Please add the quantity of the product"],
+    },
     user: {
       type: ObjectId,
       ref: "User",
