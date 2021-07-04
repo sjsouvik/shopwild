@@ -96,11 +96,7 @@ const AllProducts = (props) => {
                     <q>{searchedText}</q>
                   </em>
                 </h3>
-                <img
-                  src={Empty}
-                  alt="empty wishlist"
-                  className="empty-wishlist"
-                />
+                <img src={Empty} alt="empty list" className="empty-wishlist" />
               </div>
             )}
             <div className="card-row">

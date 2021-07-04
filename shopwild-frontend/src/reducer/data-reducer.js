@@ -1,3 +1,10 @@
+export const dataState = {
+  allProducts: [],
+  wishlist: [],
+  cart: [],
+  toastMessage: null,
+};
+
 export const dataReducer = (state, { type, payload }) => {
   switch (type) {
     case "INITIALIZE_DATA":
@@ -41,7 +48,6 @@ export const dataReducer = (state, { type, payload }) => {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-
         cart: state.cart.filter((cartItem) => cartItem.product._id !== payload),
       };
 
@@ -49,7 +55,7 @@ export const dataReducer = (state, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.map((cartItem) =>
-          cartItem.product.id === payload
+          cartItem.product._id === payload
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         ),
@@ -59,7 +65,7 @@ export const dataReducer = (state, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.map((cartItem) =>
-          cartItem.product.id === payload
+          cartItem.product._id === payload
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         ),
@@ -71,5 +77,5 @@ export const dataReducer = (state, { type, payload }) => {
 };
 
 export const isProductExistsInList = (list, payload) => {
-  return list.find((item) => item.product.id === payload.product.id);
+  return list.find((item) => item.product._id === payload.product._id);
 };
