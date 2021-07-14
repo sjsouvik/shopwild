@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useData } from "../../context/data-context";
 import { useAuth } from "../../context/auth-context";
 
+import "./NavBar.css";
+
 const NavBar = () => {
   const {
     state: { wishlist, cart },
@@ -20,6 +22,7 @@ const NavBar = () => {
           <Link to="/">SHOPWILD</Link>
         </h3>
       </div>
+
       <ul className="nav-menu">
         {/* <li className="nav-item">
               <NavLink to="/" activeStyle={{ fontWeight: "bold" }} end>
@@ -32,7 +35,7 @@ const NavBar = () => {
             activeStyle={{ fontWeight: "bold" }}
           >
             <ion-icon name="person"></ion-icon>
-            <div style={{ fontSize: "0.85rem" }}>
+            <div className="nav-text">
               {authToken ? `Hi, ${authUser?.firstName}` : "Log In"}
             </div>
           </NavLink>
@@ -47,7 +50,7 @@ const NavBar = () => {
                 </span>
               )}
             </div>
-            <div style={{ fontSize: "0.85rem" }}>Wishlist</div>
+            <div className="nav-text">Wishlist</div>
           </NavLink>{" "}
         </li>
         <li className="nav-item">
@@ -60,7 +63,7 @@ const NavBar = () => {
                 </span>
               )}
             </div>
-            <div style={{ fontSize: "0.85rem" }}>Cart</div>
+            <div className="nav-text">Cart</div>
           </NavLink>
         </li>
       </ul>
