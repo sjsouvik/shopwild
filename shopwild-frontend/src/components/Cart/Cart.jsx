@@ -1,6 +1,7 @@
 import { useData } from "../../context/data-context";
 
 import CartProduct from "./CartProduct/CartProduct";
+import CartPrice from "./CartPrice/CartPrice";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 
@@ -13,9 +14,13 @@ const Cart = (props) => {
     state: { cart },
   } = useData();
 
-  let totalPrice = cart.reduce(
-    (sum, { product, quantity }) => sum + product.offeredPrice * quantity,
-    0
+  let [totalMRP, totalPrice] = cart.reduce(
+    (sum, { product, quantity }) => {
+      sum[0] += product.actualPrice * quantity;
+      sum[1] += product.offeredPrice * quantity;
+      return sum;
+    },
+    [0, 0]
   );
 
   return (
@@ -37,21 +42,25 @@ const Cart = (props) => {
             </div>
           )}
           {cart.length > 0 && (
-            <div className="cart-body">
-              <div>
-                <b>Total: Rs. {totalPrice}</b>
+            <section className="cart">
+              <div className="cart-body">
+                <div>
+                  <b>Total: Rs. {totalPrice}</b>
+                </div>
+                {cart.map(
+                  ({ product, quantity }) =>
+                    quantity > 0 && (
+                      <CartProduct
+                        key={product.id}
+                        {...product}
+                        quantity={quantity}
+                      />
+                    )
+                )}
               </div>
-              {cart.map(
-                ({ product, quantity }) =>
-                  quantity > 0 && (
-                    <CartProduct
-                      key={product.id}
-                      {...product}
-                      quantity={quantity}
-                    />
-                  )
-              )}
-            </div>
+
+              <CartPrice totalMRP={totalMRP} totalPrice={totalPrice} />
+            </section>
           )}
         </div>
       )}

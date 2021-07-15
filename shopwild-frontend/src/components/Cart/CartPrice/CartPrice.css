@@ -1,0 +1,25 @@
+.cartPrice {
+  width: 30%;
+  padding: 1rem;
+}
+
+.color-gr {
+  color: green;
+}
+
+.totalAmount {
+  margin-top: 0.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid black;
+}
+
+.btn-width {
+  width: 100%;
+  margin: 0;
+}
+
+@media only screen and (max-width: 830px) {
+  .cartPrice {
+    width: 70%;
+  }
+}
