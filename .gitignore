@@ -3,3 +3,4 @@ build
 .netlify
 .env
 .vscode/settings.json
+.DS_Store
