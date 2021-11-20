@@ -1,0 +1,13 @@
+.toast-success {
+  position: fixed;
+  bottom: 8rem;
+  left: 1rem;
+  width: 25%;
+  z-index: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .toast-success {
+    width: 80%;
+  }
+}

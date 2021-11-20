@@ -1,0 +1,47 @@
+.product {
+  display: flex;
+  max-width: 50rem;
+  height: auto;
+  margin: 5rem auto;
+}
+
+.product p {
+  text-align: left;
+  margin-top: 0;
+}
+.product-image {
+  /* width: 15rem; */
+  width: 30%;
+  height: auto;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1.5rem;
+}
+
+.brandname {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 1.25rem;
+}
+
+.off {
+  color: #ff905a;
+  font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 550px) {
+  .product {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .product-image {
+    width: 100%;
+  }
+}
