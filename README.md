@@ -6,9 +6,21 @@ This is an e-commerce app to meet your needs
 
 Built with
 
-- Frontend - [ReactJS](https://reactjs.org/)
-- Backend - [NodeJS](https://nodejs.org/en/), [ExpressJS](ExpressJS)
+- Frontend - [ReactJS](https://reactjs.org/), [UI Blocks](https://ui-blocks.netlify.app)
+- Backend - [NodeJS](https://nodejs.org/en/), [ExpressJS](ExpressJS), [JWT](https://jwt.io/) for authentication
 - Database - [MongoDB](https://www.mongodb.com/)
+
+## Features
+
+Users can
+
+- Check all products, apply filters and search to find out the required product
+
+- Signup, signin to add products to wishlist, cart and buy finally
+
+- Add/remove products to wishlist/cart, move the product from wishlist to cart and vice-versa
+
+The application is mobile responsive as well.
 
 ## Installation
 
@@ -63,4 +75,4 @@ We can open [http://localhost:3000](http://localhost:3000) in browser to see whe
 
 ## API
 
-Backend API is publicly deployed on [Heroku](https://www.heroku.com/) and accessible on this [URL](https://api-shopwild.herokuapp.com/v1)
+Shopwild backend API is publicly deployed on [Heroku](https://www.heroku.com/) and accessible on this [URL](https://api-shopwild.herokuapp.com/v1)
