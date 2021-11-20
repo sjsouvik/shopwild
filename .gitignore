@@ -1,3 +1,7 @@
 node_modules
 build
 .netlify
+coverage
+shopwild-frontend/.DS_Store
+shopwild-frontend/.env
+.DS_Store
