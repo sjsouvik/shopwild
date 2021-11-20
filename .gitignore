@@ -3,4 +3,7 @@ build
 .netlify
 .env
 .vscode/settings.json
+coverage
+shopwild-frontend/.DS_Store
+shopwild-frontend/.env
 .DS_Store
