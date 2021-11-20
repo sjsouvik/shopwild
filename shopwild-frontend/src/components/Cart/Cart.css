@@ -1,0 +1,24 @@
+.cart {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cart-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty-cart {
+  width: 40%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 830px) {
+  .cart {
+    flex-direction: column;
+    align-items: center;
+  }
+}

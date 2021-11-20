@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+}
+
+.page-navigation {
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+}
+
+.link-active {
+  font-weight: bold;
+}
+
+.page-navigation li:hover {
+  text-decoration: underline;
+}
+
+main {
+  position: relative;
+  top: 6.5rem;
+}
+
+.badge {
+  padding: 0.15rem 0.4rem;
+}
+
+.bg-wishlist {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.75rem;
+}
+
+.bg-cart {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+}
