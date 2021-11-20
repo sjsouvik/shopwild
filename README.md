@@ -25,7 +25,7 @@ For database, you can install MongoDB locally or can use MongoDB Atlas for this.
 
 For that go to official site of mongo db, sign up and create cluster and follow this [official documentation](https://docs.atlas.mongodb.com/getting-started/) to connect with MongoDB Atlas.
 
-Create one `.env` file inside `shopwild-backend` directory to store environment variables like port no to run the server or the DB connection string. And use those variables in `app.js` file, to run the app.
+Create one `.env` file inside `shopwild-backend` directory to store environment variables like port no to run the server or the DB connection string. And use those variables in `index.js` file, to run the app.
 
 ```bash
 npm start
@@ -34,8 +34,7 @@ npm start
 it should show the following messages if everything works fine:
 
 ```bash
-Server is running on port 8081
-Server is running on port 8081
+app is running on http://localhost:8000
 Connected to DB
 ```
 
@@ -51,7 +50,7 @@ npm install
 Create one `.env` file inside `shopwild-frontend` directory to store environment variables like backend URL in this case. And use those variables in the code wherever is required to run the app like we need backend url to send request to API so in those cases, we have used environment variable. To store the backend URL in React, we need to write
 
 ```bash
-REACT_APP_BACKEND = http://localhost:8081
+REACT_APP_BACKEND = http://localhost:8000
 ```
 
 Now, run
@@ -60,8 +59,8 @@ Now, run
 npm start
 ```
 
-We can open [http://localhost:3000](http://localhost:3000) in browser to see whether the React app is running or not perfectly.
+We can open [http://localhost:3000](http://localhost:3000) in browser to see whether the app is running or not locally.
 
 ## API
 
-[Backend API](https://api-shopwild.herokuapp.com/v1)
+Backend API is publicly deployed on [Heroku](https://www.heroku.com/) and accessible on this [URL](https://api-shopwild.herokuapp.com/v1)
