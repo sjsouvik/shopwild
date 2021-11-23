@@ -1,9 +1,19 @@
+# dependencies
 node_modules
+
+# production
 build
 .netlify
-.env
-.vscode/settings.json
+
+# testing
 coverage
+
+# misc
+.vscode/settings.json
 shopwild-frontend/.DS_Store
+.env
 shopwild-frontend/.env
 .DS_Store
+
+# test results
+shopwild-frontend/report-integration-test.json

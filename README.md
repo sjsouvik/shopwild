@@ -2,6 +2,20 @@
 
 This is an e-commerce app to meet your needs
 
+## Prerequisites
+
+- Node
+- NPM
+
+To check whether Node and NPM are installed or not, Open and terminal and execute the following commands
+
+```bash
+node -v
+npm -v
+```
+
+These commands will show the installed version of the node and npm.
+
 ## Technology used
 
 Built with
