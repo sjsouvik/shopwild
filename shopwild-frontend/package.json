@@ -19,6 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "unitTest": "react-scripts test --testPathIgnorePatterns=src/integrationTest --json --outputFile=report-unit-test.json --watchAll=false",
+    "integrationTest": "react-scripts test src/integrationTest --json --outputFile=report-integration-test.json --watchAll=false",
+    "updateSnapshot": "npm run unitTest -- -u",
     "coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
