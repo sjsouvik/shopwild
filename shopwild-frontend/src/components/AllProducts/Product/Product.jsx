@@ -106,7 +106,7 @@ const Product = (props) => {
   useDisableToast();
 
   return (
-    <div className="card vertical">
+    <div className="card vertical" data-testid="productCard">
       <span
         className="btn-image"
         style={{
@@ -122,7 +122,7 @@ const Product = (props) => {
         ></ion-icon>
       </span>
       <span
-        class="btn-image"
+        className="btn-image"
         style={{
           display: props.buttonText === "MOVE TO CART" ? "block" : "none",
         }}
@@ -136,7 +136,7 @@ const Product = (props) => {
         state={props.id}
         style={{ textDecoration: "none", color: "black" }}
       >
-        <div class="card-image">
+        <div className="card-image">
           <img src={props.image} alt="pic of product" />
         </div>
 

@@ -15,7 +15,11 @@ import "./AllProducts.css";
 import Empty from "../../assets/empty.svg";
 
 const SideMenu = (props) => {
-  return <nav className="side-menu">{props.children}</nav>;
+  return (
+    <nav className="side-menu" data-testid="sideFilter">
+      {props.children}
+    </nav>
+  );
 };
 
 const AllProducts = (props) => {

@@ -12,14 +12,17 @@ const SideBarContent = () => {
   const sortByName = (a, b) => {
     if (a > b) {
       return 1;
-    } else {
+    }
+
+    if (a < b) {
       return -1;
     }
 
     return 0;
   };
-  const getBrands = () => {
-    return state.allProducts.reduce((brands, currentProduct) => {
+
+  const getAllBrands = (products) => {
+    return products.reduce((brands, currentProduct) => {
       if (!brands.includes(currentProduct.brandName)) {
         return [...brands, currentProduct.brandName];
       }
@@ -104,10 +107,10 @@ const SideBarContent = () => {
 
       <div>
         <p>BRAND</p>
-        {getBrands()
+        {getAllBrands(state.allProducts)
           .sort((a, b) => sortByName(a, b))
           .map((brand) => (
-            <p>
+            <p key={brand}>
               <label>
                 <input
                   type="checkbox"
@@ -125,7 +128,7 @@ const SideBarContent = () => {
       <div>
         <p>DISCOUNT</p>
         {[10, 20, 30, 40, 50].map((discount) => (
-          <p>
+          <p key={discount}>
             <label>
               <input
                 type="checkbox"
@@ -137,7 +140,7 @@ const SideBarContent = () => {
                   })
                 }
               />
-              {discount} % or above
+              {discount}% or above
             </label>
           </p>
         ))}

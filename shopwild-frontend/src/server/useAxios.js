@@ -31,8 +31,6 @@ const useAxios = (endpoint, propertyToInitialize) => {
               payload: { name: propertyToInitialize, data: data[endpoint] },
             });
           }
-
-          console.log(data[endpoint]);
         } else {
           const {
             response: { data },
@@ -49,8 +47,6 @@ const useAxios = (endpoint, propertyToInitialize) => {
               payload: { name: endpoint, data: data[endpoint] },
             });
           }
-
-          console.log(data[endpoint]);
         }
       } catch (error) {
         setError(true);

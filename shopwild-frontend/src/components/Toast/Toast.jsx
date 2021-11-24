@@ -37,12 +37,12 @@ const Toast = () => {
 
   return (
     <div
-      class="toast toast-success"
+      className="toast toast-success"
       style={{
         display: toastMessage ? "block" : "none",
       }}
     >
-      <ion-icon class="toast-icon" name="checkmark-circle"></ion-icon>
+      <ion-icon className="toast-icon" name="checkmark-circle"></ion-icon>
       {toastMessage}
     </div>
   );
