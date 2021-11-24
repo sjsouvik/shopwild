@@ -12,8 +12,8 @@ const NavBar = () => {
 
   const { authToken, authUser } = useAuth();
 
-  const wishlistLength = wishlist.length;
-  const cartLength = cart.length;
+  const wishlistLength = wishlist?.length;
+  const cartLength = cart?.length;
 
   return (
     <nav className="page-navigation">

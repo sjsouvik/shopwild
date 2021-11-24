@@ -40,12 +40,27 @@ describe("Integration test for AllProducts component", () => {
       },
       status: 200,
     });
+
+    window.localStorage.setItem(
+      "login",
+      JSON.stringify({
+        token: "token123",
+        user: {
+          _id: "12",
+          firstName: "test",
+          lastName: "user",
+          email: "test@gmail.com",
+        },
+      })
+    );
   });
 
   test("should render all the products with filters properly", async () => {
     await act(async () => render(<App />));
 
     expect(axios.get).toHaveBeenCalled();
+    expect(screen.queryByTestId("productLoader")).toBeNull();
+
     const productCards = screen.getAllByTestId("productCard");
     const sideFilter = screen.getByTestId("sideFilter");
 
@@ -86,6 +101,5 @@ describe("Integration test for AllProducts component", () => {
 
     // expect(products[0]).toHaveTextContent("2249");
     // expect(products[1]).toHaveTextContent("2599");
-    // screen.debug(products);
   });
 });

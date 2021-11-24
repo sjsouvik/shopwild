@@ -19,7 +19,7 @@ const Product = (props) => {
 
   const { authToken, authUser } = useAuth();
 
-  const isAddedToList = (list) => {
+  const isAddedToList = (list = []) => {
     return list.some(({ product }) => product.id === props.id);
   };
 

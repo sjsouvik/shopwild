@@ -17,3 +17,4 @@ shopwild-frontend/.env
 
 # test results
 shopwild-frontend/report-integration-test.json
+shopwild-frontend/report-unit-test.json

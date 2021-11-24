@@ -16,10 +16,7 @@ const useAxios = (endpoint, propertyToInitialize) => {
       setLoading(true);
 
       if (endpoint === "product") {
-        const {
-          response: { data },
-          error,
-        } = await serverRequests({
+        const { response, error } = await serverRequests({
           requestType: "get",
           url: `${process.env.REACT_APP_BACKEND}/${endpoint}`,
         });
@@ -27,7 +24,10 @@ const useAxios = (endpoint, propertyToInitialize) => {
         if (!error) {
           dispatch({
             type: "INITIALIZE_DATA",
-            payload: { name: propertyToInitialize, data: data[endpoint] },
+            payload: {
+              name: propertyToInitialize,
+              data: response.data[endpoint],
+            },
           });
         }
 
@@ -35,19 +35,16 @@ const useAxios = (endpoint, propertyToInitialize) => {
           setError(true);
         }
       } else {
-        const {
-          response: { data },
-          error,
-        } = await serverRequests({
+        const { response, error } = await serverRequests({
           requestType: "get",
-          url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser._id}`,
+          url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser?._id}`,
           token: { headers: { authorization: `Bearer ${authToken}` } },
         });
 
         if (!error) {
           dispatch({
             type: "INITIALIZE_DATA",
-            payload: { name: endpoint, data: data[endpoint] },
+            payload: { name: endpoint, data: response.data[endpoint] },
           });
         }
 
