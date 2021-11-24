@@ -13,46 +13,50 @@ const useAxios = (endpoint, propertyToInitialize) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        setLoading(true);
+      setLoading(true);
 
-        if (endpoint === "product") {
-          const {
-            response: { data },
-            error,
-          } = await serverRequests({
-            requestType: "get",
-            url: `${process.env.REACT_APP_BACKEND}/${endpoint}`,
+      if (endpoint === "product") {
+        const {
+          response: { data },
+          error,
+        } = await serverRequests({
+          requestType: "get",
+          url: `${process.env.REACT_APP_BACKEND}/${endpoint}`,
+        });
+
+        if (!error) {
+          dispatch({
+            type: "INITIALIZE_DATA",
+            payload: { name: propertyToInitialize, data: data[endpoint] },
           });
-
-          if (!error) {
-            dispatch({
-              type: "INITIALIZE_DATA",
-              payload: { name: propertyToInitialize, data: data[endpoint] },
-            });
-          }
-        } else {
-          const {
-            response: { data },
-            error,
-          } = await serverRequests({
-            requestType: "get",
-            url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser._id}`,
-            token: { headers: { authorization: `Bearer ${authToken}` } },
-          });
-
-          if (!error) {
-            dispatch({
-              type: "INITIALIZE_DATA",
-              payload: { name: endpoint, data: data[endpoint] },
-            });
-          }
         }
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
+
+        if (error) {
+          setError(true);
+        }
+      } else {
+        const {
+          response: { data },
+          error,
+        } = await serverRequests({
+          requestType: "get",
+          url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser._id}`,
+          token: { headers: { authorization: `Bearer ${authToken}` } },
+        });
+
+        if (!error) {
+          dispatch({
+            type: "INITIALIZE_DATA",
+            payload: { name: endpoint, data: data[endpoint] },
+          });
+        }
+
+        if (error) {
+          setError(true);
+        }
       }
+
+      setLoading(false);
     })();
   }, []);
 

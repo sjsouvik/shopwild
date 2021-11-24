@@ -65,11 +65,10 @@ const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  //   useEffect(() => {
-  //     console.log("Token", token);
-  //     token && setupAuthHeaderForServiceCalls(token);
-  //     setupAuthExceptionHandler(logout, navigate);
-  //   }, []);
+  useEffect(() => {
+    // token && setupAuthHeaderForServiceCalls(token);
+    setupAuthExceptionHandler(logout, navigate);
+  }, []);
 
   return (
     <AuthContext.Provider

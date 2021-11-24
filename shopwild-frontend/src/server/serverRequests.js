@@ -5,19 +5,15 @@ const serverRequests = async ({ requestType, data, url, token }) => {
     case "get":
       try {
         const response = await axios.get(url, token);
-        return response.status === 200
-          ? { response, error: false }
-          : { error: true };
+        return { response, statusCode: response?.status };
       } catch (error) {
-        return { error: true };
+        return { error: true, statusCode: error?.response?.status };
       }
 
     case "post":
       try {
         const response = await axios.post(url, data, token);
-        return response.status === 200
-          ? { response, statusCode: response.status }
-          : { response: null, statusCode: 400 };
+        return { response, statusCode: response?.status };
       } catch (error) {
         return { response: null, statusCode: error.response.status };
       }
@@ -25,11 +21,9 @@ const serverRequests = async ({ requestType, data, url, token }) => {
     case "delete":
       try {
         const response = await axios.delete(url, token);
-        return response.status === 200
-          ? { response, error: false }
-          : { error: true };
+        return { response, statusCode: response?.status };
       } catch (error) {
-        return { error: true };
+        return { error: true, statusCode: error?.response?.status };
       }
 
     default:
