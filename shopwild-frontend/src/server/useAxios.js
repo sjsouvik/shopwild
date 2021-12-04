@@ -34,7 +34,7 @@ const useAxios = (endpoint, propertyToInitialize) => {
         if (error) {
           setError(true);
         }
-      } else {
+      } else if (authToken) {
         const { response, error } = await serverRequests({
           requestType: "get",
           url: `${process.env.REACT_APP_BACKEND}/${endpoint}/${authUser?._id}`,
