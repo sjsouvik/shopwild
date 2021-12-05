@@ -4,7 +4,7 @@ import axios from "axios";
 jest.mock("axios");
 
 describe("tests server requests", () => {
-  test("should return the response with status code as 200 if the API is successful", async () => {
+  test("should return the response with status code as 200 if the API get request is successful", async () => {
     const data = [
       {
         id: "2131",
