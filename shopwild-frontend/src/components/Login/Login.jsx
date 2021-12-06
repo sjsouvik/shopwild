@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../context/auth-context";
@@ -12,11 +12,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const emailRef = useRef(null);
+
   const loginHandler = async (e) => {
     e.preventDefault();
 
     login(email, password);
   };
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   return (
     <form className="form" onSubmit={loginHandler}>
@@ -30,6 +36,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          ref={emailRef}
         />
       </div>
 
