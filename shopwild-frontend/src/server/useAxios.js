@@ -47,7 +47,7 @@ const useAxios = (endpoint, propertyToInitialize) => {
         });
       }
 
-      if(statusCode === 401){
+      if (statusCode === 401) {
         return logout();
       }
 
@@ -57,7 +57,7 @@ const useAxios = (endpoint, propertyToInitialize) => {
     }
 
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     getProducts();

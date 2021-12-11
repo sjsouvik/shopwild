@@ -35,7 +35,6 @@ const AuthProvider = ({ children }) => {
       (error) => {
         if (error?.response?.status === UNAUTHORIZED) {
           logoutUser();
-          navigate("/login");
         }
         return Promise.reject(error);
       }

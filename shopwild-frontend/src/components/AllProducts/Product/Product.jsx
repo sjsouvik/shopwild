@@ -98,7 +98,7 @@ const Product = (props) => {
         authToken
       );
       if (isItemWishlisted) {
-        toastHandler(dispatch, "Items has been wishlisted!");
+        toastHandler(dispatch, "Item has been wishlisted!");
       }
     }
   };
@@ -108,6 +108,7 @@ const Product = (props) => {
   return (
     <div className="card vertical" data-testid="productCard">
       <span
+        data-testid="wishlistButton"
         className="btn-image"
         style={{
           display: props.buttonText === "ADD TO CART" ? "block" : "none",
@@ -122,6 +123,7 @@ const Product = (props) => {
         ></ion-icon>
       </span>
       <span
+        data-testid="removeButton"
         className="btn-image"
         style={{
           display: props.buttonText === "MOVE TO CART" ? "block" : "none",

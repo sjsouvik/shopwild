@@ -41,7 +41,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/wishlist" activeStyle={{ fontWeight: "bold" }}>
+          <NavLink
+            to="/wishlist"
+            data-testid="wishlistLink"
+            activeStyle={{ fontWeight: "bold" }}
+          >
             <div style={{ position: "relative" }}>
               <ion-icon name="heart"></ion-icon>
               {authToken && wishlistLength > 0 && (
@@ -58,7 +62,7 @@ const NavBar = () => {
             <div style={{ position: "relative" }}>
               <ion-icon name="cart"></ion-icon>
               {authToken && cartLength > 0 && (
-                <span class="badge rounded-pill bg-light bg-cart">
+                <span className="badge rounded-pill bg-light bg-cart">
                   {cartLength}
                 </span>
               )}
