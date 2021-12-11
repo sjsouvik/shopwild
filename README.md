@@ -20,8 +20,12 @@ These commands will show the installed version of the node and npm.
 
 Built with
 
-- Frontend - [ReactJS](https://reactjs.org/), [UI Blocks](https://ui-blocks.netlify.app)
+- Frontend - [ReactJS](https://reactjs.org/), [React Router](https://reactrouter.com/docs/en/v6), [UI Blocks](https://ui-blocks.netlify.app)
+
+- Tests - [Jest](https://jestjs.io/docs/getting-started), [React Testing Library](https://testing-library.com/docs/)
+
 - Backend - [NodeJS](https://nodejs.org/en/), [ExpressJS](ExpressJS), [JWT](https://jwt.io/) for authentication
+
 - Database - [MongoDB](https://www.mongodb.com/)
 
 ## Features
