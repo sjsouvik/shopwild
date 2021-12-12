@@ -15,7 +15,10 @@ import {
 } from "../../server/serverUpdate";
 
 const ProductDetails = () => {
-  const { state: productId } = useLocation();
+  const {
+    state: { productId },
+  } = useLocation();
+
   const navigate = useNavigate();
 
   const { state, dispatch } = useData();
@@ -81,8 +84,8 @@ const ProductDetails = () => {
 
   return (
     <div className="card product">
-      <img src={product?.image} alt="image" className="product-image" />
-      <div class="product-details">
+      <img src={product?.image} alt="product" className="product-image" />
+      <div className="product-details">
         <b>
           <p className="brandname">{product?.brandName}</p>
         </b>

@@ -135,7 +135,7 @@ const Product = (props) => {
 
       <Link
         to={{ pathname: `/products/${props.id}` }}
-        state={props.id}
+        state={{ productId: props.id }}
         style={{ textDecoration: "none", color: "black" }}
       >
         <div className="card-image">
