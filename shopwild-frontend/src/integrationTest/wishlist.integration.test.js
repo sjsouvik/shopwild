@@ -78,7 +78,7 @@ describe("Integration test for wishlist", () => {
     expect(toastMessage).toBeDefined();
 
     const wishlistLink = screen.getByTestId("wishlistLink");
-    fireEvent.click(wishlistLink);
+    await act(async () => fireEvent.click(wishlistLink));
 
     expect(window.location.href).toContain("wishlist");
 
