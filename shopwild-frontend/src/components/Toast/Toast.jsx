@@ -36,15 +36,12 @@ const Toast = () => {
   } = useData();
 
   return (
-    <div
-      className="toast toast-success"
-      style={{
-        display: toastMessage ? "block" : "none",
-      }}
-    >
-      <ion-icon className="toast-icon" name="checkmark-circle"></ion-icon>
-      {toastMessage}
-    </div>
+    toastMessage && (
+      <div className="toast toast-success">
+        <ion-icon className="toast-icon" name="checkmark-circle"></ion-icon>
+        {toastMessage}
+      </div>
+    )
   );
 };
 
