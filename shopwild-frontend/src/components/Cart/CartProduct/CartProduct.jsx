@@ -78,7 +78,13 @@ const CartProduct = (props) => {
 
   return (
     <div className="card horizontal">
-      <img src={props.image} alt="image" className="horizontal-card-image" />
+      <img
+        src={props.image}
+        alt="products in cart"
+        width="144"
+        height="192"
+        className="horizontal-card-image"
+      />
       <div className="card-body">
         <div className="horizontal-section">
           <p className="product-title">{props.brandName}</p>

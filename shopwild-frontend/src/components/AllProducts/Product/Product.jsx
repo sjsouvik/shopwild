@@ -139,7 +139,12 @@ const Product = (props) => {
         style={{ textDecoration: "none", color: "black" }}
       >
         <div className="card-image">
-          <img src={props.image} width="230" height="307" alt="pic of product" />
+          <img
+            src={props.image}
+            width="230"
+            height="307"
+            alt="pic of product"
+          />
         </div>
 
         <div
