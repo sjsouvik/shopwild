@@ -19,7 +19,9 @@ const NavBar = () => {
     <nav className="page-navigation">
       <div className="brand">
         <h3 className="nav-brand">
-          <Link to="/">SHOPWILD</Link>
+          <Link to="/" data-testid="allProductsLink">
+            SHOPWILD
+          </Link>
         </h3>
       </div>
 
