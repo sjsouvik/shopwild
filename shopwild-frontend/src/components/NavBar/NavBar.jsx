@@ -58,7 +58,11 @@ const NavBar = () => {
           </NavLink>{" "}
         </li>
         <li className="nav-item">
-          <NavLink to="/cart" activeStyle={{ fontWeight: "bold" }}>
+          <NavLink
+            to="/cart"
+            data-testid="cartLink"
+            activeStyle={{ fontWeight: "bold" }}
+          >
             <div style={{ position: "relative" }}>
               <ion-icon name="cart"></ion-icon>
               {authToken && cartLength > 0 && (

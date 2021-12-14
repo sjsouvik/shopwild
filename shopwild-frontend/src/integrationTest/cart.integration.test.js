@@ -1,11 +1,11 @@
-import { render, act, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen, act } from "@testing-library/react";
 import App from "../App";
 
 import axios from "axios";
 
 jest.mock("axios");
 
-describe("Integration test for wishlist", () => {
+describe("Integration test for cart", () => {
   beforeEach(() => {
     const allProducts = [
       {
@@ -61,24 +61,23 @@ describe("Integration test for wishlist", () => {
     );
   });
 
-  test("should render all products, add some products to wishlist and remove product from wishlist", async () => {
+  test("should render all products, add some products to cart and remove product from cart", async () => {
     await act(async () => render(<App />));
 
-    const wishlistBtns = screen.getAllByTestId("wishlistButton");
-    await act(async () => fireEvent.click(wishlistBtns[0]));
-    const toastMessage = screen.getByText(/item has been wishlisted!/i);
+    const cartBtns = screen.getAllByTestId("cartButton");
+    await act(async () => fireEvent.click(cartBtns[0]));
+    const toastMessage = screen.getByText(/added to cart!/i);
     expect(toastMessage).toBeDefined();
 
-    const wishlistLink = screen.getByTestId("wishlistLink");
-    await act(async () => fireEvent.click(wishlistLink));
+    const cartLink = screen.getByTestId("cartLink");
+    await act(async () => fireEvent.click(cartLink));
+    expect(window.location.href).toContain("cart");
 
-    expect(window.location.href).toContain("wishlist");
+    const cartProducts = screen.getAllByTestId("cartProduct");
+    expect(cartProducts.length).toBe(1);
 
-    const wishlistedProducts = screen.getAllByTestId("productCard");
-    expect(wishlistedProducts.length).toBe(1);
-
-    const removeFromWishlistBtns = screen.getAllByTestId("removeButton");
-    await act(async () => fireEvent.click(removeFromWishlistBtns[0]));
-    expect(screen.queryAllByTestId("productCard").length).toBe(0);
+    const removeFromCartBtns = screen.getAllByTestId("removeButton");
+    await act(async () => fireEvent.click(removeFromCartBtns[0]));
+    expect(screen.queryAllByTestId("cartProduct").length).toBe(0);
   });
 });

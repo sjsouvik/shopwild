@@ -77,7 +77,7 @@ const CartProduct = (props) => {
   useDisableToast();
 
   return (
-    <div className="card horizontal">
+    <div className="card horizontal" data-testid="cartProduct">
       <img
         src={props.image}
         alt="products in cart"
@@ -124,6 +124,7 @@ const CartProduct = (props) => {
           <button
             className="btn btn-sm btn-danger"
             onClick={removeFromCartHandler}
+            data-testid="removeButton"
           >
             REMOVE
           </button>

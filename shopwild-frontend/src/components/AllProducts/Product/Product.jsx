@@ -169,6 +169,7 @@ const Product = (props) => {
           className="btn btn-primary"
           style={{ width: "100%", margin: "0" }}
           onClick={(e) => clickHandler(e)}
+          data-testid="cartButton"
         >
           {authToken && isAddedToList(state.cart)
             ? "GO TO CART"
