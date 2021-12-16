@@ -63,7 +63,7 @@ npm start
 
 it should show the following messages if everything works fine:
 
-```bash
+```
 app is running on http://localhost:8000
 Connected to DB
 ```
@@ -90,6 +90,23 @@ npm start
 ```
 
 We can open [http://localhost:3000](http://localhost:3000) in browser to see whether the app is running or not locally.
+
+### Testing
+
+To run unit and integration tests execute following commands respectively
+
+```bash
+npm run unitTest
+npm run integrationTest
+```
+
+Execute following command to check test coverage
+
+```bash
+npm run coverage
+```
+
+> Currently, test coverage is ~80%
 
 ## API
 
