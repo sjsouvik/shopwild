@@ -25,55 +25,63 @@ const Login = () => {
   }, []);
 
   return (
-    <form className="form" onSubmit={loginHandler}>
-      <h3>Log in to your account</h3>
-      <p className="input-error">{loginError}</p>
-      <div>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          ref={emailRef}
-        />
+    <>
+      <form className="form" onSubmit={loginHandler}>
+        <h3>Log in to your account</h3>
+        <p className="input-error">{loginError}</p>
+        <div>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            ref={emailRef}
+          />
+        </div>
+
+        <div className="password">
+          <input
+            type={showPassword ? "text" : "password"}
+            className="form-control password-input"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          {password && (
+            <div
+              className="show-password"
+              onClick={() => setShowPassword((showPassword) => !showPassword)}
+            >
+              {showPassword ? "HIDE" : "SHOW"}
+            </div>
+          )}
+        </div>
+
+        <button
+          className="btn btn-primary form-button"
+          disabled={!email || !password}
+        >
+          LOGIN
+        </button>
+      </form>
+      <div>OR</div>
+      <div className="form">
+        <button
+          className="btn btn-primary form-button"
+          onClick={() => login("test@gmail.com", "test123")}
+        >
+          LOGIN as Guest
+        </button>
       </div>
-
-      <div className="password">
-        <input
-          type={showPassword ? "text" : "password"}
-          className="form-control password-input"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        {password && (
-          <div
-            className="show-password"
-            onClick={() => setShowPassword((showPassword) => !showPassword)}
-          >
-            {showPassword ? "HIDE" : "SHOW"}
-          </div>
-        )}
-      </div>
-
-      <button className="btn btn-primary form-button">LOGIN</button>
       <p>
         Not an user yet?{" "}
         <Link to="/signup" className="link">
           Create your account
         </Link>
       </p>
-
-      <div style={{ border: "1px solid #e5e5e5", padding: "1rem" }}>
-        <h4>Credentials to test the app if you don't want to sign up</h4>
-        <p>Email: test@gmail.com</p>
-        <p>Password: test123</p>
-      </div>
-    </form>
+    </>
   );
 };
 
