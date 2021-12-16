@@ -40,19 +40,6 @@ describe("Integration test for AllProducts component", () => {
       },
       status: 200,
     });
-
-    window.localStorage.setItem(
-      "login",
-      JSON.stringify({
-        token: "token123",
-        user: {
-          _id: "12",
-          firstName: "test",
-          lastName: "user",
-          email: "test@gmail.com",
-        },
-      })
-    );
   });
 
   test("should render all the products with filters properly", async () => {

@@ -1,10 +1,10 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { act, render, fireEvent, screen } from "@testing-library/react";
 import App from "../App";
 import axios from "axios";
 
 jest.mock("axios");
 
-describe("Integration test for product details", () => {
+describe("Integration test for profile", () => {
   beforeEach(() => {
     const allProducts = [
       {
@@ -36,13 +36,7 @@ describe("Integration test for product details", () => {
     axios.get.mockResolvedValue({
       data: {
         product: allProducts,
-        wishlist: [],
-        cart: [],
       },
-      status: 200,
-    });
-
-    axios.post.mockResolvedValue({
       status: 200,
     });
 
@@ -60,26 +54,16 @@ describe("Integration test for product details", () => {
     );
   });
 
-  test("should render all details of a product, add to wishlist and cart on click of wishlist and add to cart button respectively", async () => {
+  test("should render the profile page and logout the user on click of logout button", async () => {
     await act(async () => render(<App />));
 
-    const productDetailsLink = screen.getAllByTestId("productDetailsLink");
-    await act(async () => fireEvent.click(productDetailsLink[0]));
+    const loginProfileLink = screen.getByTestId("loginProfileLink");
+    fireEvent.click(loginProfileLink);
+    expect(window.location.href).toContain("profile");
 
-    expect(window.location.href).toContain("products");
-
-    const wishlistBtn = screen.getByTestId("wishlistButton");
-    await act(async () => fireEvent.click(wishlistBtn));
-    expect(wishlistBtn.textContent).toBe("WISHLISTED");
-
-    await act(async () => fireEvent.click(wishlistBtn));
-    expect(wishlistBtn.textContent).toBe("WISHLIST");
-
-    const cartBtn = screen.getByTestId("cartButton");
-    await act(async () => fireEvent.click(cartBtn));
-    expect(cartBtn.textContent).toBe("GO TO CART");
-
-    await act(async () => fireEvent.click(cartBtn));
-    expect(window.location.href).toContain("cart");
+    const logoutBtn = screen.getByTestId("logoutButton");
+    fireEvent.click(logoutBtn);
+    fireEvent.click(loginProfileLink);
+    expect(window.location.href).toContain("login");
   });
 });

@@ -35,6 +35,7 @@ const NavBar = () => {
           <NavLink
             to={authToken ? "/profile" : "/login"}
             activeStyle={{ fontWeight: "bold" }}
+            data-testid="loginProfileLink"
           >
             <ion-icon name="person"></ion-icon>
             <div className="nav-text">

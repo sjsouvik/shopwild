@@ -4,7 +4,11 @@ const Profile = () => {
   const { logout } = useAuth();
   return (
     <div>
-      <button className="btn btn-primary" onClick={logout}>
+      <button
+        data-testid="logoutButton"
+        className="btn btn-primary"
+        onClick={logout}
+      >
         Logout
       </button>
     </div>
