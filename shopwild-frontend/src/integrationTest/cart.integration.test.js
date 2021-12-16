@@ -80,4 +80,23 @@ describe("Integration test for cart", () => {
     await act(async () => fireEvent.click(removeFromCartBtns[0]));
     expect(screen.queryAllByTestId("cartProduct").length).toBe(0);
   });
+
+  test("should move the product to wishlist on click of move to wishlist button", async () => {
+    await act(async () => render(<App />));
+
+    const allProductsLink = screen.getByTestId("allProductsLink");
+    await act(async () => fireEvent.click(allProductsLink));
+    const cartBtns = screen.getAllByTestId("cartButton");
+    await act(async () => fireEvent.click(cartBtns[0]));
+    await act(async () => fireEvent.click(cartBtns[0]));
+
+    const moveToWishlistBtns = screen.getAllByTestId("moveToWishlistButton");
+    await act(async () => fireEvent.click(moveToWishlistBtns[0]));
+
+    const wishlistLink = screen.getByTestId("wishlistLink");
+    await act(async () => fireEvent.click(wishlistLink));
+
+    const wishlistedProducts = screen.getAllByTestId("productCard");
+    expect(wishlistedProducts.length).toBe(1);
+  });
 });

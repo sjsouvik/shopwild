@@ -106,13 +106,15 @@ const CartProduct = (props) => {
             <button
               className="btn btn-outline-primary btn-inc"
               onClick={increaseQuantityHandler}
+              data-testid="increaseQtyButton"
             >
               <ion-icon name="add"></ion-icon>
             </button>
-            {props.quantity}
+            <span data-testid="qty">{props.quantity}</span>
             <button
               className="btn btn-outline-primary btn-dec"
               onClick={decreaseQuantityHandler}
+              data-testid="decreaseQtyButton"
             >
               <ion-icon name="remove"></ion-icon>
             </button>
@@ -131,6 +133,7 @@ const CartProduct = (props) => {
           <button
             className="btn btn-sm btn-primary"
             onClick={moveToWishlistHandler}
+            data-testid="moveToWishlistButton"
           >
             MOVE TO WISHLIST
           </button>
