@@ -137,6 +137,7 @@ const Product = (props) => {
         to={{ pathname: `/products/${props.id}` }}
         state={{ productId: props.id }}
         style={{ textDecoration: "none", color: "black" }}
+        data-testid="productDetailsLink"
       >
         <div className="card-image">
           <img

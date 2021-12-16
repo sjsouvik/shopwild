@@ -107,7 +107,11 @@ const ProductDetails = () => {
           </span>
         </p>
         <div style={{ textAlign: "left" }}>
-          <button className="btn btn-primary btn-lg" onClick={clickHandler}>
+          <button
+            className="btn btn-primary btn-lg"
+            onClick={clickHandler}
+            data-testid="cartButton"
+          >
             {authToken && isAddedToList(state.cart)
               ? "GO TO CART"
               : "ADD TO CART"}
@@ -115,6 +119,7 @@ const ProductDetails = () => {
           <button
             className="btn btn-outline-primary btn-lg"
             onClick={wishlistHandler}
+            data-testid="wishlistButton"
           >
             {authToken && isAddedToList(state.wishlist)
               ? "WISHLISTED"
