@@ -7,6 +7,7 @@ import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
 import Profile from "../components/Profile/Profile";
 import NotFound from "../components/NotFound/NotFound";
+import Loader from "../components/Loader/Loader";
 
 import useAxios from "../server/useAxios";
 
@@ -25,7 +26,7 @@ const AppRouter = () => {
   const [isCartLoading, cartLoadingError] = useAxios("cart", null);
 
   return (
-    <Suspense fallback={<p>Loading Route...</p>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<AllProducts loading={isProductLoading} />} />
         <PrivateRoute
