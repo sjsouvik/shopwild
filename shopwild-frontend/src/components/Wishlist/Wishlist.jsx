@@ -6,8 +6,6 @@ import Loader from "../Loader/Loader";
 
 import Empty from "../../assets/empty.svg";
 
-import "./Wishlist.css";
-
 const Wishlist = (props) => {
   const {
     state: { wishlist },
@@ -29,11 +27,7 @@ const Wishlist = (props) => {
           {wishlist.length === 0 && (
             <div>
               <h3>Wishlist is empty :(</h3>
-              <img
-                src={Empty}
-                alt="empty wishlist"
-                className="empty-wishlist"
-              />
+              <img src={Empty} alt="empty wishlist" height="300" width="300" />
             </div>
           )}
           {wishlist.length > 0 && (

@@ -38,7 +38,7 @@ const Cart = (props) => {
           {cart.length === 0 && (
             <div>
               <h3>Cart is empty :(</h3>
-              <img src={EmptyCart} alt="empty cart" className="empty-cart" />
+              <img src={EmptyCart} alt="empty cart" height="300" width="300" />
             </div>
           )}
           {cart.length > 0 && (

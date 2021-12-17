@@ -100,7 +100,7 @@ const AllProducts = (props) => {
                     <q>{searchedText}</q>
                   </em>
                 </h3>
-                <img src={Empty} alt="empty list" className="empty-wishlist" />
+                <img src={Empty} alt="empty list" height="300" width="300" />
               </div>
             )}
             <div className="card-row">
