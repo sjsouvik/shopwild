@@ -37,6 +37,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             ref={emailRef}
+            required
           />
         </div>
 
@@ -47,6 +48,7 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           {password && (
@@ -59,12 +61,7 @@ const Login = () => {
           )}
         </div>
 
-        <button
-          className="btn btn-primary form-button"
-          disabled={!email || !password}
-        >
-          LOGIN
-        </button>
+        <button className="btn btn-primary form-button">LOGIN</button>
       </form>
       <div>OR</div>
       <div className="form">
