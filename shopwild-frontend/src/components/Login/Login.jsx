@@ -61,7 +61,12 @@ const Login = () => {
           )}
         </div>
 
-        <button className="btn btn-primary form-button">LOGIN</button>
+        <button
+          className="btn btn-primary form-button"
+          data-testid="loginButton"
+        >
+          LOGIN
+        </button>
       </form>
       <div>OR</div>
       <div className="form">

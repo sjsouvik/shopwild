@@ -59,7 +59,7 @@ describe("Integration test for login", () => {
     expect(window.location.href).toContain("login");
     const emailInput = screen.getByPlaceholderText(/email/i);
     const passwordInput = screen.getByPlaceholderText(/password/i);
-    const loginBtn = screen.getByText(/login/i);
+    const loginBtn = screen.getByTestId("loginButton");
     fireEvent.change(emailInput, { target: { value: "test@gmail.com" } });
     fireEvent.change(passwordInput, { target: { value: "test123" } });
 
@@ -80,7 +80,7 @@ describe("Integration test for login", () => {
 
     const emailInput = screen.getByPlaceholderText(/email/i);
     const passwordInput = screen.getByPlaceholderText(/password/i);
-    const loginBtn = screen.getByText(/login/i);
+    const loginBtn = screen.getByTestId("loginButton");
     fireEvent.change(emailInput, { target: { value: "test@gmail.com" } });
     fireEvent.change(passwordInput, { target: { value: "test" } });
 
