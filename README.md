@@ -110,4 +110,4 @@ npm run coverage
 
 ## API
 
-Shopwild backend API is publicly deployed on [Heroku](https://www.heroku.com/) and accessible on this [URL](https://api-shopwild.herokuapp.com/v1)
+Shopwild backend API is publicly deployed on [Vercel](https://vercel.com/) and available on this [URL](https://api-shopwild.vercel.app)
