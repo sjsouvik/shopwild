@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { useData } from "../../context/data-context";
-import { useFilter } from "../../context/filter-context";
+import { useData, useFilter } from "../../context";
 
 import useAxios from "../../server/useAxios";
 

@@ -1,9 +1,7 @@
 import "./Product.css";
 
 import { useNavigate, Link } from "react-router-dom";
-
 import { useData, useAuth } from "../../../context";
-
 import { toastHandler, useDisableToast } from "../../Toast/Toast";
 
 import {

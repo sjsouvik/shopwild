@@ -1,10 +1,6 @@
-import { useData } from "../../../context/data-context";
-import { useAuth } from "../../../context/auth-context";
-
+import { useData, useAuth } from "../../../context";
 import serverRequests from "../../../server/serverRequests";
-
 import { toastHandler, useDisableToast } from "../../Toast/Toast";
-
 import { addToWishlist, removeFromCart } from "../../../server/serverUpdate";
 
 const CartProduct = (props) => {
