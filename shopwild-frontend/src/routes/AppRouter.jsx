@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import AllProducts from "../components/AllProducts/AllProducts";
 import Login from "../components/Login/Login";
@@ -28,12 +27,12 @@ const AppRouter = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path="/" element={<AllProducts loading={isProductLoading} />} />
         <PrivateRoute
           path="/wishlist"
           element={<Wishlist loading={isWishlistLoading} />}
         />
         <PrivateRoute path="/cart" element={<Cart loading={isCartLoading} />} />
+        <Route path="/" element={<AllProducts loading={isProductLoading} />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

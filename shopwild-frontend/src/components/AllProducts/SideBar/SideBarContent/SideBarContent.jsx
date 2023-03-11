@@ -1,4 +1,9 @@
 import { useData, useFilter } from "../../../../context";
+import {
+  discountsInPerCentage,
+  getAllBrandsFromProducts,
+  sortByName,
+} from "../../../../helper";
 
 const SideBarContent = () => {
   const { state } = useData();
@@ -6,28 +11,6 @@ const SideBarContent = () => {
 
   const sortHandler = (e) => {
     dispatch({ type: "SORT", payload: e.target.value });
-  };
-
-  const sortByName = (a, b) => {
-    if (a > b) {
-      return 1;
-    }
-
-    if (a < b) {
-      return -1;
-    }
-
-    return 0;
-  };
-
-  const getAllBrands = (products) => {
-    return products.reduce((brands, currentProduct) => {
-      if (!brands.includes(currentProduct.brandName)) {
-        return [...brands, currentProduct.brandName];
-      }
-
-      return brands;
-    }, []);
   };
 
   return (
@@ -106,7 +89,7 @@ const SideBarContent = () => {
 
       <div>
         <p>BRAND</p>
-        {getAllBrands(state.allProducts)
+        {getAllBrandsFromProducts(state.allProducts)
           .sort((a, b) => sortByName(a, b))
           .map((brand) => (
             <p key={brand}>
@@ -126,7 +109,7 @@ const SideBarContent = () => {
 
       <div>
         <p>DISCOUNT</p>
-        {[10, 20, 30, 40, 50].map((discount) => (
+        {discountsInPerCentage.map((discount) => (
           <p key={discount}>
             <label>
               <input
