@@ -1,5 +1,4 @@
-import { useData } from "../../../../context/data-context";
-import { useFilter } from "../../../../context/filter-context";
+import { useData, useFilter } from "../../../../context";
 
 const SideBarContent = () => {
   const { state } = useData();
