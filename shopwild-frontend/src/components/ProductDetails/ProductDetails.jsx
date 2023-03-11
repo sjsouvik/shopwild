@@ -1,12 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { useAuth, useData } from "../../context";
+import Toast, { toastHandler, useDisableToast } from "../Toast/Toast";
 import "./ProductDetails.css";
-
-import { useData } from "../../context/data-context";
-import { useAuth } from "../../context/auth-context";
-
-import Toast from "../Toast/Toast";
-import { toastHandler, useDisableToast } from "../Toast/Toast";
 
 import {
   addToCart,
