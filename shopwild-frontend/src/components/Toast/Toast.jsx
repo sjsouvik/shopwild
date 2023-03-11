@@ -1,7 +1,6 @@
 import { useEffect } from "react";
+import { useData } from "../../context";
 import "./Toast.css";
-
-import { useData } from "../../context/data-context";
 
 export const useDisableToast = () => {
   const { dispatch } = useData();

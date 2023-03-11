@@ -1,10 +1,8 @@
-import { useData } from "../../context/data-context";
-
 import Product from "../AllProducts/Product/Product";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
-
 import Empty from "../../assets/empty.svg";
+import { useData } from "../../context";
 
 const Wishlist = (props) => {
   const {

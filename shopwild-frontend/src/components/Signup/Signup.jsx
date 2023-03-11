@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../../server/serverUpdate";
-
+import { useAuth } from "../../context";
 import "../Login/Login.css";
-
-import { useAuth } from "../../context/auth-context";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
