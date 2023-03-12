@@ -1,4 +1,4 @@
-export const getAllBrandsFromProducts = (products) => {
+const getAllBrandsFromProducts = (products) => {
   return products.reduce((brands, currentProduct) => {
     if (!brands.includes(currentProduct.brandName)) {
       return [...brands, currentProduct.brandName];
@@ -8,7 +8,7 @@ export const getAllBrandsFromProducts = (products) => {
   }, []);
 };
 
-export const sortByName = (a, b) => {
+const sortByName = (a, b) => {
   if (a > b) {
     return 1;
   }
@@ -19,3 +19,5 @@ export const sortByName = (a, b) => {
 
   return 0;
 };
+
+export { getAllBrandsFromProducts, sortByName };
