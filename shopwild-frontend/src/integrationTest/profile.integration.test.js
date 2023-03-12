@@ -58,7 +58,7 @@ describe("Integration test for profile", () => {
     await act(async () => render(<App />));
 
     const loginProfileLink = screen.getByTestId("loginProfileLink");
-    fireEvent.click(loginProfileLink);
+    await act(async () => fireEvent.click(loginProfileLink));
     expect(window.location.href).toContain("profile");
 
     const logoutBtn = screen.getByTestId("logoutButton");
