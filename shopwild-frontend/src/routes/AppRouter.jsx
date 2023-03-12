@@ -8,7 +8,7 @@ import NotFound from "../components/NotFound/NotFound";
 import Loader from "../components/Loader/Loader";
 import useAxios from "../server/useAxios";
 
-const Wishlist = lazy(() => import("../components/Wishlist/Wishlist"));
+const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));
 const Cart = lazy(() => import("../components/Cart/Cart"));
 const Profile = lazy(() => import("../components/Profile/Profile"));
 const ProductDetails = lazy(() =>

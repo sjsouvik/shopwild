@@ -1,6 +1,6 @@
 import Product from "../../pages/AllProducts/Product/Product";
-import Toast from "../Toast/Toast";
-import Loader from "../Loader/Loader";
+import Toast from "../../components/Toast/Toast";
+import Loader from "../../components/Loader/Loader";
 import Empty from "../../assets/empty.svg";
 import { useData } from "../../context";
 
