@@ -12,7 +12,7 @@ const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));
 const Cart = lazy(() => import("../components/Cart/Cart"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
 const ProductDetails = lazy(() =>
-  import("../components/ProductDetails/ProductDetails")
+  import("../pages/ProductDetails/ProductDetails")
 );
 
 const AppRouter = () => {

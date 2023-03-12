@@ -1,6 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth, useData } from "../../context";
-import Toast, { toastHandler, useDisableToast } from "../Toast/Toast";
+import Toast, {
+  toastHandler,
+  useDisableToast,
+} from "../../components/Toast/Toast";
 import "./ProductDetails.css";
 
 import {
