@@ -4,13 +4,13 @@ import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
-import NotFound from "../components/NotFound/NotFound";
+import NotFound from "../pages/NotFound/NotFound";
 import Loader from "../components/Loader/Loader";
 import useAxios from "../server/useAxios";
 
 const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));
 const Cart = lazy(() => import("../components/Cart/Cart"));
-const Profile = lazy(() => import("../components/Profile/Profile"));
+const Profile = lazy(() => import("../pages/Profile/Profile"));
 const ProductDetails = lazy(() =>
   import("../components/ProductDetails/ProductDetails")
 );

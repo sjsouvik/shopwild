@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import notFound from "../../assets/page_not_found.svg";
 
 const NotFound = () => {
