@@ -2,7 +2,7 @@ import "./Product.css";
 
 import { useNavigate, Link } from "react-router-dom";
 import { useData, useAuth } from "../../../context";
-import { toastHandler, useDisableToast } from "../../Toast/Toast";
+import { toastHandler, useDisableToast } from "../../../components/Toast/Toast";
 
 import {
   addToWishlist,

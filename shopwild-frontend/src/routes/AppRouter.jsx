@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import AllProducts from "../components/AllProducts/AllProducts";
+import AllProducts from "../pages/AllProducts/AllProducts";
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
 import NotFound from "../components/NotFound/NotFound";

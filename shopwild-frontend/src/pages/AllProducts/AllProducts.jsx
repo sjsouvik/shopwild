@@ -7,8 +7,8 @@ import useAxios from "../../server/useAxios";
 import Product from "./Product/Product";
 import SideBar from "./SideBar/SideBar";
 import SideBarContent from "./SideBar/SideBarContent/SideBarContent";
-import Toast from "../Toast/Toast";
-import Loader from "../Loader/Loader";
+import Toast from "../../components/Toast/Toast";
+import Loader from "../../components/Loader/Loader";
 import "./AllProducts.css";
 
 import Empty from "../../assets/empty.svg";

@@ -1,4 +1,4 @@
-import Product from "../AllProducts/Product/Product";
+import Product from "../../pages/AllProducts/Product/Product";
 import Toast from "../Toast/Toast";
 import Loader from "../Loader/Loader";
 import Empty from "../../assets/empty.svg";
