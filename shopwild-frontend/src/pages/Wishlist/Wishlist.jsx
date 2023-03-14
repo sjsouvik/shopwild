@@ -1,5 +1,4 @@
-import Product from "../../pages/AllProducts/Product/Product";
-import { Loader, Toast } from "../../components";
+import { Product, Loader, Toast } from "../../components";
 import Empty from "../../assets/empty.svg";
 import { useData } from "../../context";
 

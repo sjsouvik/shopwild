@@ -1,13 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useData, useAuth } from "../../../context";
-import { toastHandler, useDisableToast } from "../../../components";
+import { useData, useAuth } from "../../context";
+import { toastHandler, useDisableToast } from "../Toast/Toast";
 import "./Product.css";
 
 import {
   addToWishlist,
   removeFromWishlist,
   addToCart,
-} from "../../../server/serverUpdate";
+} from "../../server/serverUpdate";
 
 const Product = (props) => {
   const { state, dispatch } = useData();
