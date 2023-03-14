@@ -1,11 +1,10 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import { PrivateRoute, Loader } from "../components";
 import AllProducts from "../pages/AllProducts/AllProducts";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import NotFound from "../pages/NotFound/NotFound";
-import Loader from "../components/Loader/Loader";
 import useAxios from "../server/useAxios";
 
 const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));

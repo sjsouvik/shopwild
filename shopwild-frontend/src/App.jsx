@@ -1,5 +1,5 @@
 import AppRouter from "./routes/AppRouter";
-import NavBar from "./components/NavBar/NavBar";
+import { NavBar } from "./components";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider, DataProvider, FilterProvider } from "./context";

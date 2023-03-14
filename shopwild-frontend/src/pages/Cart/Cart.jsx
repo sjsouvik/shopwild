@@ -2,11 +2,8 @@ import { useData } from "../../context";
 
 import CartProduct from "./CartProduct/CartProduct";
 import CartPrice from "./CartPrice/CartPrice";
-import Toast from "../../components/Toast/Toast";
-import Loader from "../../components/Loader/Loader";
-
+import { Loader, Toast } from "../../components";
 import EmptyCart from "../../assets/empty_cart.svg";
-
 import "./Cart.css";
 
 const Cart = (props) => {
