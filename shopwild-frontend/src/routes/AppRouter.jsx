@@ -9,7 +9,7 @@ import Loader from "../components/Loader/Loader";
 import useAxios from "../server/useAxios";
 
 const Wishlist = lazy(() => import("../pages/Wishlist/Wishlist"));
-const Cart = lazy(() => import("../components/Cart/Cart"));
+const Cart = lazy(() => import("../pages/Cart/Cart"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
 const ProductDetails = lazy(() =>
   import("../pages/ProductDetails/ProductDetails")

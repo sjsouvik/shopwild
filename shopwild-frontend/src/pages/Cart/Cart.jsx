@@ -2,8 +2,8 @@ import { useData } from "../../context";
 
 import CartProduct from "./CartProduct/CartProduct";
 import CartPrice from "./CartPrice/CartPrice";
-import Toast from "../Toast/Toast";
-import Loader from "../Loader/Loader";
+import Toast from "../../components/Toast/Toast";
+import Loader from "../../components/Loader/Loader";
 
 import EmptyCart from "../../assets/empty_cart.svg";
 
