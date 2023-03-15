@@ -21,7 +21,7 @@ const AllProducts = (props) => {
   const [searchedText, setSearchedText] = useState("");
 
   const { state } = useData();
-  const { state: filterState, dispatch } = useFilter();
+  const { state: filterState } = useFilter();
 
   const filterProducts = (products) => {
     const sortBy = filterState.sortBy;
@@ -57,10 +57,6 @@ const AllProducts = (props) => {
     );
 
     return filteredProducts;
-  };
-
-  const sortHandler = (e) => {
-    dispatch({ type: "SORT", payload: e.target.value });
   };
 
   const filteredProducts = filterProducts(state.allProducts);

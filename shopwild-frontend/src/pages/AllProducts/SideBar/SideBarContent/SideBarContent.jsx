@@ -9,10 +9,6 @@ const SideBarContent = () => {
   const { state } = useData();
   const { state: filterState, dispatch } = useFilter();
 
-  const sortHandler = (e) => {
-    dispatch({ type: "SORT", payload: e.target.value });
-  };
-
   return (
     <>
       <div className="filter">
