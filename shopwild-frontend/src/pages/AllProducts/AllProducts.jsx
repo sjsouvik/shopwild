@@ -61,8 +61,10 @@ const AllProducts = (props) => {
 
   const filteredProducts = filterProducts(state.allProducts);
 
-  const [isWishlistLoading, wishlistLoadingError] = useAxios("wishlist", null);
-  const [isCartLoading, cartLoadingError] = useAxios("cart", null);
+  // TODO: use `useEffect()` and fetch wishlist, cart details only if user has logged in
+  // following calls are useful to fetch wishlist, cart details once user logs in or the page is refreshed, so that the count of products in wishlist, cart could be shown
+  useAxios("wishlist", null);
+  useAxios("cart", null);
 
   return (
     <div className="grid-row">
