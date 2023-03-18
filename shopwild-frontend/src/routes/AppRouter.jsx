@@ -15,12 +15,9 @@ const ProductDetails = lazy(() =>
 );
 
 const AppRouter = () => {
-  const [isProductLoading, productLoadingError] = useAxios(
-    "product",
-    "allProducts"
-  );
-  const [isWishlistLoading, wishlistLoadingError] = useAxios("wishlist", null);
-  const [isCartLoading, cartLoadingError] = useAxios("cart", null);
+  const [isProductLoading] = useAxios("product", "allProducts");
+  const [isWishlistLoading] = useAxios("wishlist", null);
+  const [isCartLoading] = useAxios("cart", null);
 
   const routes = [
     { path: "/", element: <AllProducts loading={isProductLoading} /> },
