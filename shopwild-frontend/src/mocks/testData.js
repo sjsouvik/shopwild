@@ -25,4 +25,13 @@ const products = [
   },
 ];
 
-export { products };
+const user = {
+  email: "test@gmail.com",
+  firstName: "User",
+  lastName: "Auth Testing",
+  _id: "123",
+};
+
+const loggedInUserDetails = { token: "token123", user };
+
+export { products, loggedInUserDetails };

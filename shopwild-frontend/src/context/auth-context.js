@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common["Authorization"];
   };
 
-  const setupAuthExceptionHandler = (logoutUser, navigate) => {
+  const setupAuthExceptionHandler = (logoutUser) => {
     const UNAUTHORIZED = 401;
     axios.interceptors.response.use(
       (response) => response,
@@ -61,12 +61,12 @@ const AuthProvider = ({ children }) => {
     localStorage?.removeItem("login");
     setAuthToken(null);
     // setupAuthHeaderForServiceCalls(null);
-    navigate("/");
+    navigate("/login");
   };
 
   useEffect(() => {
     // token && setupAuthHeaderForServiceCalls(token);
-    setupAuthExceptionHandler(logout, navigate);
+    setupAuthExceptionHandler(logout);
   }, []);
 
   return (

@@ -1,8 +1,12 @@
 import { rest } from "msw";
 import { endpoints } from "../common/endpoints";
-import { products } from "./testData";
+import { products, loggedInUserDetails } from "./testData";
 
 export const handlers = [
+  rest.post(endpoints.login, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(loggedInUserDetails));
+  }),
+
   rest.get(endpoints.products, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ product: products }));
   }),
