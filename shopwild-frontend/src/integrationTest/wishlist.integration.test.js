@@ -1,10 +1,6 @@
 import { render, act, screen, fireEvent } from "@testing-library/react";
 import App from "../App";
 
-import axios from "axios";
-
-jest.mock("axios");
-
 describe("Integration test for wishlist", () => {
   beforeEach(() => {
     const allProducts = [
@@ -34,19 +30,6 @@ describe("Integration test for wishlist", () => {
       },
     ];
 
-    axios.get.mockResolvedValue({
-      data: {
-        product: allProducts,
-        wishlist: [],
-        cart: [],
-      },
-      status: 200,
-    });
-
-    axios.post.mockResolvedValue({
-      status: 200,
-    });
-
     window.localStorage.setItem(
       "login",
       JSON.stringify({
@@ -67,9 +50,9 @@ describe("Integration test for wishlist", () => {
     const wishlistBtns = screen.getAllByTestId("wishlistButton");
     await act(async () => fireEvent.click(wishlistBtns[0]));
     const toastMessage = screen.getByText(/item has been wishlisted!/i);
-    expect(toastMessage).toBeDefined();
+    expect(toastMessage).toBeInTheDocument();
 
-    const wishlistLink = screen.getByTestId("wishlistLink");
+    const wishlistLink = screen.getByRole("link", { name: /wishlist/i });
     await act(async () => fireEvent.click(wishlistLink));
 
     expect(window.location.href).toContain("wishlist");
@@ -82,7 +65,7 @@ describe("Integration test for wishlist", () => {
     expect(screen.queryAllByTestId("productCard").length).toBe(0);
   });
 
-  test("should move the product to cart on click of move to cart button", async () => {
+  test("should move the product from wishlist to cart on click of move to cart button", async () => {
     await act(async () => render(<App />));
 
     const allProductsLink = screen.getByTestId("allProductsLink");

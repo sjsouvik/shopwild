@@ -15,6 +15,10 @@ export const handlers = [
     return res(ctx.status(200));
   }),
 
+  rest.delete(endpoints.wishlist, (req, res, ctx) => {
+    return res(ctx.status(200));
+  }),
+
   rest.get(endpoints.cart, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ cart: [] }));
   }),
