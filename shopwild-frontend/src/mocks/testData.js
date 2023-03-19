@@ -1,4 +1,4 @@
-const allProducts = [
+const products = [
   {
     id: "2131",
     brandName: "Roadster",
@@ -25,4 +25,4 @@ const allProducts = [
   },
 ];
 
-export { allProducts };
+export { products };
