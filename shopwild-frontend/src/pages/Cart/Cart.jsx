@@ -20,47 +20,48 @@ const Cart = (props) => {
     [0, 0]
   );
 
+  if (props.loading) {
+    return <Loader />;
+  }
+
+  if (cart.length === 0) {
+    return (
+      <div>
+        <h3>Your cart is empty :(</h3>
+        <img src={EmptyCart} alt="empty cart" height="300" width="300" />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2>
-        My Cart{" "}
+        My Cart
         <span style={{ fontSize: "1rem", fontWeight: "200" }}>
-          {cart.length} item(s)
+          {` ${cart.length} item(s)`}
         </span>
       </h2>
-      {props.loading ? (
-        <Loader />
-      ) : (
-        <div>
-          {cart.length === 0 && (
-            <div>
-              <h3>Cart is empty :(</h3>
-              <img src={EmptyCart} alt="empty cart" height="300" width="300" />
-            </div>
-          )}
-          {cart.length > 0 && (
-            <section className="cart">
-              <div className="cart-body">
-                <div>
-                  <b>Total: Rs. {totalPrice}</b>
-                </div>
-                {cart.map(
-                  ({ product, quantity }) =>
-                    quantity > 0 && (
-                      <CartProduct
-                        key={product.id}
-                        {...product}
-                        quantity={quantity}
-                      />
-                    )
-                )}
-              </div>
 
-              <CartPrice totalMRP={totalMRP} totalPrice={totalPrice} />
-            </section>
+      <section className="cart">
+        <div className="cart-body">
+          <div>
+            <b>Total: Rs. {totalPrice}</b>
+          </div>
+          {cart.map(
+            ({ product, quantity }) =>
+              quantity > 0 && (
+                <CartProduct
+                  key={product.id}
+                  {...product}
+                  quantity={quantity}
+                />
+              )
           )}
         </div>
-      )}
+
+        <CartPrice totalMRP={totalMRP} totalPrice={totalPrice} />
+      </section>
+
       <Toast />
     </div>
   );
