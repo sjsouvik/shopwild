@@ -1,4 +1,9 @@
 import { discountsInPerCentage } from "./constants";
-import { getAllBrandsFromProducts, sortByName } from "./utils";
+import { getAllBrandsFromProducts, sortByName, priceOfCart } from "./utils";
 
-export { discountsInPerCentage, getAllBrandsFromProducts, sortByName };
+export {
+  discountsInPerCentage,
+  getAllBrandsFromProducts,
+  sortByName,
+  priceOfCart,
+};

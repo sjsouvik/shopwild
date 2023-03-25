@@ -5,7 +5,7 @@ import CartPrice from "./CartPrice/CartPrice";
 import { Loader, Toast } from "../../components";
 import EmptyCart from "../../assets/empty_cart.svg";
 import "./Cart.css";
-import { priceOfCart } from "../../helper/utils";
+import { priceOfCart } from "../../helper";
 
 const Cart = (props) => {
   const {
