@@ -5,20 +5,14 @@ import CartPrice from "./CartPrice/CartPrice";
 import { Loader, Toast } from "../../components";
 import EmptyCart from "../../assets/empty_cart.svg";
 import "./Cart.css";
+import { priceOfCart } from "../../helper/utils";
 
 const Cart = (props) => {
   const {
     state: { cart },
   } = useData();
 
-  let [totalMRP, totalPrice] = cart.reduce(
-    (sum, { product, quantity }) => {
-      sum[0] += product.actualPrice * quantity;
-      sum[1] += product.offeredPrice * quantity;
-      return sum;
-    },
-    [0, 0]
-  );
+  let [totalMRP, totalPrice] = priceOfCart(cart);
 
   if (props.loading) {
     return <Loader />;

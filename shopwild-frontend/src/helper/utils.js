@@ -20,4 +20,15 @@ const sortByName = (a, b) => {
   return 0;
 };
 
-export { getAllBrandsFromProducts, sortByName };
+const priceOfCart = (cart) => {
+  return cart.reduce(
+    (sum, { product, quantity }) => {
+      sum[0] += product.actualPrice * quantity;
+      sum[1] += product.offeredPrice * quantity;
+      return sum;
+    },
+    [0, 0]
+  );
+};
+
+export { getAllBrandsFromProducts, sortByName, priceOfCart };
