@@ -28,20 +28,11 @@ const Wishlist = (props) => {
           {` ${wishlist.length} item(s)`}
         </span>
       </h2>
-
-      <>
-        {wishlist.length > 0 && (
-          <div className="card-row">
-            {wishlist.map(({ product }) => (
-              <Product
-                key={product.id}
-                {...product}
-                buttonText="MOVE TO CART"
-              />
-            ))}
-          </div>
-        )}
-      </>
+      <div className="card-row">
+        {wishlist.map(({ product }) => (
+          <Product key={product.id} {...product} buttonText="MOVE TO CART" />
+        ))}
+      </div>
 
       <Toast />
     </div>
