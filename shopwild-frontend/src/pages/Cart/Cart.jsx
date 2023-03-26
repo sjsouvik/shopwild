@@ -5,7 +5,7 @@ import CartPrice from "./CartPrice/CartPrice";
 import { Loader, Toast } from "../../components";
 import EmptyCart from "../../assets/empty_cart.svg";
 import "./Cart.css";
-import { priceOfCart } from "../../helper";
+import { priceOfCart, pluralize } from "../../helper";
 
 const Cart = (props) => {
   const {
@@ -32,7 +32,7 @@ const Cart = (props) => {
       <h2>
         My Cart
         <span style={{ fontSize: "1rem", fontWeight: "200" }}>
-          {` ${cart.length} item(s)`}
+          {` (${pluralize(cart.length, "item")})`}
         </span>
       </h2>
 

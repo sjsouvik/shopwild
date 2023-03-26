@@ -31,4 +31,8 @@ const priceOfCart = (cart) => {
   );
 };
 
-export { getAllBrandsFromProducts, sortByName, priceOfCart };
+const pluralize = (count, query) => {
+  return count > 1 ? `${count} ${query}s` : `${count} ${query}`;
+};
+
+export { getAllBrandsFromProducts, sortByName, priceOfCart, pluralize };

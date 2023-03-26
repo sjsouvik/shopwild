@@ -1,6 +1,7 @@
 import { Product, Loader, Toast } from "../../components";
 import Empty from "../../assets/empty.svg";
 import { useData } from "../../context";
+import { pluralize } from "../../helper";
 
 const Wishlist = (props) => {
   const {
@@ -25,7 +26,7 @@ const Wishlist = (props) => {
       <h2>
         My Wishlist
         <span style={{ fontSize: "1rem", fontWeight: "200" }}>
-          {` ${wishlist.length} item(s)`}
+          {` (${pluralize(wishlist.length, "item")})`}
         </span>
       </h2>
       <div className="card-row">
