@@ -25,7 +25,7 @@ const Login = () => {
   return (
     <>
       <form className="form" onSubmit={loginHandler}>
-        <h3>Log in to your account</h3>
+        <h2>Log in to your account</h2>
         <p className="input-error">{loginError}</p>
         <div>
           <input

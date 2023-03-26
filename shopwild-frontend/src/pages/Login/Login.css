@@ -1,10 +1,10 @@
 .form {
-  width: 30%;
+  width: 35%;
   margin: auto;
 }
 
 .form-button {
-  width: 85%;
+  width: 80%;
 }
 
 .password {
@@ -19,7 +19,7 @@
   cursor: pointer;
   position: absolute;
   top: 0.9rem;
-  right: 2.75rem;
+  right: 4rem;
 }
 
 .input-error {
@@ -28,21 +28,51 @@
   font-size: 0.9rem;
 }
 
+@media only screen and (max-width: 1300px) {
+  .show-password {
+    right: 3rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .show-password {
+    right: 2.5rem;
+  }
+}
+
 @media only screen and (max-width: 850px) {
   .form {
-    width: 50%;
+    width: 60%;
+  }
+
+  .show-password {
+    right: 3.5rem;
   }
 }
 
 @media only screen and (max-width: 700px) {
   .form {
-    width: 60%;
+    width: 70%;
+  }
+
+  .show-password {
+    right: 3.5rem;
   }
 }
 
 @media only screen and (max-width: 500px) {
   .form {
-    width: 90%;
+    width: 100%;
+  }
+
+  .show-password {
+    right: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .show-password {
+    right: 2.75rem;
   }
 }
 
