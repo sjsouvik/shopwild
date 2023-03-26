@@ -57,7 +57,7 @@ const Signup = () => {
 
   return (
     <form className="form" onSubmit={signupHandler}>
-      <h3>Create your account</h3>
+      <h2>Create your account</h2>
       <input
         type="text"
         className="form-control"
