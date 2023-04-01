@@ -1,5 +1,5 @@
 import AppRouter from "./routes/AppRouter";
-import { NavBar } from "./components";
+import { NavBar, ErrorBoundary } from "./components";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider, DataProvider, FilterProvider } from "./context";
@@ -16,7 +16,9 @@ const App = () => {
               <NavBar />
 
               <main>
-                <AppRouter />
+                <ErrorBoundary>
+                  <AppRouter />
+                </ErrorBoundary>
               </main>
             </div>
           </FilterProvider>
