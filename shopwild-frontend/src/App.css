@@ -36,3 +36,7 @@ main {
   top: -0.5rem;
   left: 1rem;
 }
+
+.cursor-ptr {
+  cursor: pointer;
+}

@@ -24,7 +24,7 @@ const SideBarContent = () => {
       <div>
         <p>Sort By</p>
         <p>
-          <label>
+          <label className="cursor-ptr">
             <input
               type="radio"
               checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
@@ -36,7 +36,7 @@ const SideBarContent = () => {
           </label>
         </p>
         <p>
-          <label>
+          <label className="cursor-ptr">
             <input
               type="radio"
               checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
@@ -55,7 +55,7 @@ const SideBarContent = () => {
           .sort((a, b) => sortByName(a, b))
           .map((brand) => (
             <p key={brand}>
-              <label>
+              <label className="cursor-ptr">
                 <input
                   type="checkbox"
                   checked={filterState.filterByBrands.includes(brand)}
@@ -73,7 +73,7 @@ const SideBarContent = () => {
         <p>DISCOUNT</p>
         {discountsInPerCentage.map((discount) => (
           <p key={discount}>
-            <label>
+            <label className="cursor-ptr">
               <input
                 type="checkbox"
                 checked={filterState.filterByDiscounts.includes(discount)}

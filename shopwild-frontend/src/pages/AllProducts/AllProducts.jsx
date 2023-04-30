@@ -24,41 +24,54 @@ const AllProducts = (props) => {
   const { state: filterState } = useFilter();
 
   const filterProducts = (products) => {
-    const sortBy = filterState.sortBy;
+    const { sortBy, filterByBrands, filterByDiscounts } = filterState;
 
-    let sortedProducts;
+    let filteredProducts = products;
 
-    if (sortBy && sortBy === "SORT_HIGH_TO_LOW") {
-      sortedProducts = products.toSorted(
-        (a, b) => b.offeredPrice - a.offeredPrice
-      );
-    } else if (sortBy && sortBy === "SORT_LOW_TO_HIGH") {
-      sortedProducts = products.toSorted(
-        (a, b) => a.offeredPrice - b.offeredPrice
-      );
-    } else {
-      sortedProducts = products;
+    /* 
+    
+    sort() method mutates the original array, so, if we want to avoid that, we can do any of the following approaches:
+    
+    1. use toSorted() method instead of sort() method which returns a new array with sorted items
+    2. create a shallow copy [...items] before  applying sort on it 
+
+    Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sort_returns_the_reference_to_the_same_array
+
+    */
+
+    if (sortBy) {
+      if (sortBy === "SORT_HIGH_TO_LOW") {
+        filteredProducts = filteredProducts.toSorted(
+          (a, b) => b.offeredPrice - a.offeredPrice
+        );
+      } else if (sortBy === "SORT_LOW_TO_HIGH") {
+        filteredProducts = [...filteredProducts].sort(
+          (a, b) => a.offeredPrice - b.offeredPrice
+        );
+      }
     }
 
-    let filteredProducts = sortedProducts;
-
-    if (filterState.filterByBrands.length > 0) {
+    if (filterByBrands.length > 0) {
       filteredProducts = filteredProducts.filter((product) =>
-        filterState.filterByBrands.includes(product.brandName)
+        filterByBrands.includes(product.brandName)
       );
     }
 
-    if (filterState.filterByDiscounts.length > 0) {
+    if (filterByDiscounts.length > 0) {
       filteredProducts = filteredProducts.filter(
-        (product) => product.discount >= filterState.filterByDiscounts[0]
+        (product) => product.discount >= filterByDiscounts[0]
       );
     }
 
-    filteredProducts = filteredProducts.filter(
-      (product) =>
-        product.brandName.toLowerCase().includes(searchedText.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchedText.toLowerCase())
-    );
+    if (searchedText) {
+      filteredProducts = filteredProducts.filter(
+        (product) =>
+          product.brandName
+            .toLowerCase()
+            .includes(searchedText.toLowerCase()) ||
+          product.description.toLowerCase().includes(searchedText.toLowerCase())
+      );
+    }
 
     return filteredProducts;
   };
@@ -77,7 +90,7 @@ const AllProducts = (props) => {
       </SideMenu>
       <div className="products">
         <input
-          type="text"
+          type="search"
           value={searchedText}
           className="form-control"
           placeholder="Search for products, brands and more"
