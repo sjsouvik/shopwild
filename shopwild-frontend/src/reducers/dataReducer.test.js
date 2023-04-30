@@ -1,4 +1,4 @@
-import { dataState, dataReducer } from "./data-reducer";
+import { dataState, dataReducer } from "./dataReducer";
 
 describe("testing wishlist", () => {
   test("should add an item to wishlist when ADD_TO_WISHLIST action is dispatched", () => {
