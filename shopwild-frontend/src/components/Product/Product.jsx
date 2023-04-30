@@ -1,5 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useData, useAuth } from "../../context";
+import { useData, useAuth } from "../../providers";
 import { toastHandler, useDisableToast } from "../Toast/Toast";
 import "./Product.css";
 

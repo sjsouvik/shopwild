@@ -1,5 +1,5 @@
-import DataProvider, { useData } from "./data-context";
-import FilterProvider, { useFilter } from "./filter-context";
+import DataProvider, { useData } from "./DataProvider";
+import FilterProvider, { useFilter } from "./FilterProvider";
 import AuthProvider, { useAuth } from "./AuthProvider";
 
 export {

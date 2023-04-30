@@ -1,4 +1,4 @@
-import { useData, useAuth } from "../../../context";
+import { useData, useAuth } from "../../../providers";
 import serverRequests from "../../../server/serverRequests";
 import { toastHandler, useDisableToast } from "../../../components";
 import { addToWishlist, removeFromCart } from "../../../server/serverUpdate";

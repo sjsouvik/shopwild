@@ -1,5 +1,5 @@
 import { Navigate, Route } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth } from "../../providers";
 
 const PrivateRoute = ({ path, ...props }) => {
   const { authToken } = useAuth();

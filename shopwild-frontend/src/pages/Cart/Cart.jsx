@@ -1,4 +1,4 @@
-import { useData } from "../../context";
+import { useData } from "../../providers";
 
 import CartProduct from "./CartProduct/CartProduct";
 import CartPrice from "./CartPrice/CartPrice";

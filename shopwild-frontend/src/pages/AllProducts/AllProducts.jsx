@@ -2,7 +2,7 @@ import { Product, Loader, Toast } from "../../components";
 import SideBar from "./SideBar/SideBar";
 import SideBarContent from "./SideBar/SideBarContent/SideBarContent";
 import { useState } from "react";
-import { useData, useFilter } from "../../context";
+import { useData, useFilter } from "../../providers";
 import useAxios from "../../server/useAxios";
 import "./AllProducts.css";
 

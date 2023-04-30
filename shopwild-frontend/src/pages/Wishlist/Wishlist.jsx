@@ -1,6 +1,6 @@
 import { Product, Loader, Toast } from "../../components";
 import Empty from "../../assets/empty.svg";
-import { useData } from "../../context";
+import { useData } from "../../providers";
 import { pluralize } from "../../helper";
 
 const Wishlist = (props) => {

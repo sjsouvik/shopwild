@@ -1,4 +1,4 @@
-import { useData, useFilter } from "../../../../context";
+import { useData, useFilter } from "../../../../providers";
 import {
   discountsInPerCentage,
   getAllBrandsFromProducts,

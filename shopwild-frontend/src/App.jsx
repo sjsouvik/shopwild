@@ -2,7 +2,7 @@ import AppRouter from "./routes/AppRouter";
 import { NavBar, ErrorBoundary } from "./components";
 
 import { BrowserRouter as Router } from "react-router-dom";
-import { AuthProvider, DataProvider, FilterProvider } from "./context";
+import { AuthProvider, DataProvider, FilterProvider } from "./providers";
 
 import "./App.css";
 

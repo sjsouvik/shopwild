@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import serverRequests from "./serverRequests";
-import { useAuth, useData } from "../context";
+import { useAuth, useData } from "../providers";
 
 const useAxios = (endpoint, propertyToInitialize) => {
   const [loading, setLoading] = useState(false);
