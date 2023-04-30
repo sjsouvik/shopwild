@@ -1,6 +1,6 @@
 import DataProvider, { useData } from "./data-context";
 import FilterProvider, { useFilter } from "./filter-context";
-import AuthProvider, { useAuth } from "./auth-context";
+import AuthProvider, { useAuth } from "./AuthProvider";
 
 export {
   DataProvider,

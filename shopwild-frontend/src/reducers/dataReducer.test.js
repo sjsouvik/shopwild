@@ -310,7 +310,7 @@ describe("testing cart", () => {
   });
 });
 
-describe("testing toast ", () => {
+describe("testing toast", () => {
   test("should enable or disable toast when ENABLE_OR_DISABLE_TOAST action is dispatched", () => {
     let action = {
       type: "ENABLE_OR_DISABLE_TOAST",
