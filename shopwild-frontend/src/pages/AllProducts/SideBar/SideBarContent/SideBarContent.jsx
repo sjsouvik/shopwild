@@ -29,7 +29,7 @@ const SideBarContent = () => {
               type="radio"
               checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
               onChange={() =>
-                dispatch({ type: "SORT", payload: "SORT_HIGH_TO_LOW" })
+                dispatch({ type: "SORT_BY_PRICE", payload: "SORT_HIGH_TO_LOW" })
               }
             />
             Price - High to Low
@@ -41,7 +41,7 @@ const SideBarContent = () => {
               type="radio"
               checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
               onChange={() =>
-                dispatch({ type: "SORT", payload: "SORT_LOW_TO_HIGH" })
+                dispatch({ type: "SORT_BY_PRICE", payload: "SORT_LOW_TO_HIGH" })
               }
             />
             Price - Low to High

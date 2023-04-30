@@ -1,15 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
 
-import { filterReducer } from "../reducer/filter-reducer";
+import { initialFilterState, filterReducer } from "../reducer/filter-reducer";
 
 const FilterContext = createContext();
 
 const FilterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(filterReducer, {
-    sortBy: null,
-    filterByBrands: [],
-    filterByDiscounts: [],
-  });
+  const [state, dispatch] = useReducer(filterReducer, initialFilterState);
   return (
     <FilterContext.Provider value={{ state, dispatch }}>
       {children}

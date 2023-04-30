@@ -41,7 +41,7 @@ const AllProducts = (props) => {
 
     if (sortBy) {
       if (sortBy === "SORT_HIGH_TO_LOW") {
-        filteredProducts = filteredProducts.toSorted(
+        filteredProducts = [...filteredProducts].sort(
           (a, b) => b.offeredPrice - a.offeredPrice
         );
       } else if (sortBy === "SORT_LOW_TO_HIGH") {
