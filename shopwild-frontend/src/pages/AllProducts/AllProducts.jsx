@@ -29,9 +29,13 @@ const AllProducts = (props) => {
     let sortedProducts;
 
     if (sortBy && sortBy === "SORT_HIGH_TO_LOW") {
-      sortedProducts = products.sort((a, b) => b.offeredPrice - a.offeredPrice);
+      sortedProducts = products.toSorted(
+        (a, b) => b.offeredPrice - a.offeredPrice
+      );
     } else if (sortBy && sortBy === "SORT_LOW_TO_HIGH") {
-      sortedProducts = products.sort((a, b) => a.offeredPrice - b.offeredPrice);
+      sortedProducts = products.toSorted(
+        (a, b) => a.offeredPrice - b.offeredPrice
+      );
     } else {
       sortedProducts = products;
     }

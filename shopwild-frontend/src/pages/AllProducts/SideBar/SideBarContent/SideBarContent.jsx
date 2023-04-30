@@ -27,10 +27,7 @@ const SideBarContent = () => {
           <label>
             <input
               type="radio"
-              name="sort"
-              // value="SORT_HIGH_TO_LOW"
-              // checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
-              // onChange={(e) => sortHandler(e)}
+              checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
               onChange={() =>
                 dispatch({ type: "SORT", payload: "SORT_HIGH_TO_LOW" })
               }
@@ -42,10 +39,7 @@ const SideBarContent = () => {
           <label>
             <input
               type="radio"
-              name="sort"
-              // value="SORT_LOW_TO_HIGH"
-              // checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
-              // onChange={(e) => sortHandler(e)}
+              checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
               onChange={() =>
                 dispatch({ type: "SORT", payload: "SORT_LOW_TO_HIGH" })
               }
@@ -54,34 +48,6 @@ const SideBarContent = () => {
           </label>
         </p>
       </div>
-
-      {/* <div>
-        <p>Sort By</p>
-        <p>
-          <label>
-            <input
-              type="radio"
-              name="sort"
-              value="SORT_HIGH_TO_LOW"
-              checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
-              onChange={sortHandler}
-            />
-            Price - High to Low
-          </label>
-        </p>
-        <p>
-          <label>
-            <input
-              type="radio"
-              name="sort"
-              value="SORT_LOW_TO_HIGH"
-              checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
-              onChange={sortHandler}
-            />
-            Price - Low to High
-          </label>
-        </p>
-      </div> */}
 
       <div>
         <p>BRAND</p>
