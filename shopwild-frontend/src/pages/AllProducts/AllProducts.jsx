@@ -21,7 +21,7 @@ const AllProducts = (props) => {
   const [searchedText, setSearchedText] = useState("");
 
   const { state } = useData();
-  const { state: filterState } = useFilter();
+  const { filterState } = useFilter();
 
   const filterProducts = (products) => {
     const { sortBy, filterByBrands, filterByDiscounts } = filterState;

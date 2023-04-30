@@ -7,7 +7,7 @@ import {
 
 const SideBarContent = () => {
   const { state } = useData();
-  const { state: filterState, dispatch } = useFilter();
+  const { filterState, filterDispatch } = useFilter();
 
   return (
     <>
@@ -15,7 +15,7 @@ const SideBarContent = () => {
         <p>FILTERS</p>
         <p
           className="clear-filter"
-          onClick={() => dispatch({ type: "CLEAR_FILTER" })}
+          onClick={() => filterDispatch({ type: "CLEAR_FILTER" })}
         >
           CLEAR ALL
         </p>
@@ -29,7 +29,10 @@ const SideBarContent = () => {
               type="radio"
               checked={filterState.sortBy === "SORT_HIGH_TO_LOW"}
               onChange={() =>
-                dispatch({ type: "SORT_BY_PRICE", payload: "SORT_HIGH_TO_LOW" })
+                filterDispatch({
+                  type: "SORT_BY_PRICE",
+                  payload: "SORT_HIGH_TO_LOW",
+                })
               }
             />
             Price - High to Low
@@ -41,7 +44,10 @@ const SideBarContent = () => {
               type="radio"
               checked={filterState.sortBy === "SORT_LOW_TO_HIGH"}
               onChange={() =>
-                dispatch({ type: "SORT_BY_PRICE", payload: "SORT_LOW_TO_HIGH" })
+                filterDispatch({
+                  type: "SORT_BY_PRICE",
+                  payload: "SORT_LOW_TO_HIGH",
+                })
               }
             />
             Price - Low to High
@@ -60,7 +66,7 @@ const SideBarContent = () => {
                   type="checkbox"
                   checked={filterState.filterByBrands.includes(brand)}
                   onChange={() =>
-                    dispatch({ type: "FILTER_BY_BRANDS", payload: brand })
+                    filterDispatch({ type: "FILTER_BY_BRANDS", payload: brand })
                   }
                 />
                 {brand}
@@ -78,7 +84,7 @@ const SideBarContent = () => {
                 type="checkbox"
                 checked={filterState.filterByDiscounts.includes(discount)}
                 onChange={() =>
-                  dispatch({
+                  filterDispatch({
                     type: "FILTER_BY_DISCOUNTS",
                     payload: discount,
                   })

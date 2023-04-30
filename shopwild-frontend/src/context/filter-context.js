@@ -5,9 +5,12 @@ import { initialFilterState, filterReducer } from "../reducer/filter-reducer";
 const FilterContext = createContext();
 
 const FilterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(filterReducer, initialFilterState);
+  const [filterState, filterDispatch] = useReducer(
+    filterReducer,
+    initialFilterState
+  );
   return (
-    <FilterContext.Provider value={{ state, dispatch }}>
+    <FilterContext.Provider value={{ filterState, filterDispatch }}>
       {children}
     </FilterContext.Provider>
   );
