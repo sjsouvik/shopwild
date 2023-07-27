@@ -5,8 +5,14 @@
 
 version: 2
 updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/shopwild-frontend/" # Location of package manifests
     open-pull-requests-limit: 20
     schedule:
-      interval: "weekly"
+      interval: "daily"

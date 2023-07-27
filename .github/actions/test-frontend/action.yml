@@ -1,0 +1,34 @@
+name: Test the frontend with npm and all dependencies
+description: ""
+
+inputs:
+  base-path:
+    required: true
+    description: Location of frontend source code
+
+runs:
+  using: composite
+  steps:
+    - name: Use node js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Cache node modules
+      uses: actions/cache@v3
+      id: cache-npm
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{inputs.base-path}}
+      run: npm ci
+
+    - name: Test the app and find test coverage
+      shell: bash
+      working-directory: ${{inputs.base-path}}
+      run: npm run coverage

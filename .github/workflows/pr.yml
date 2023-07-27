@@ -1,0 +1,29 @@
+name: Test PRs
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: /shopwild-frontend/
+
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v3
+
+      - name: Run the frontend tests and build the app
+        uses: ./.github/actions/test-frontend
+        with:
+          base-path: /shopwild-frontend/
+
+  automerge-dependabots:
+    needs:
+      - test-frontend
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+    uses: sjsouvik/shopwild/.github/workflows/dependabot-automerge.yml@main
+    secrets: inherit
