@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: /shopwild-frontend/
+        working-directory: shopwild-frontend/
 
     steps:
       - name: Checkout the latest code
@@ -19,7 +19,7 @@ jobs:
       - name: Run the frontend tests and build the app
         uses: ./.github/actions/test-frontend
         with:
-          base-path: /shopwild-frontend/
+          base-path: shopwild-frontend/
 
   automerge-dependabots:
     needs:
